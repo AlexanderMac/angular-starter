@@ -1,5 +1,5 @@
 'use strict';
 
-var requireDir = require('require-dir');
+let requireDir = require('require-dir');
 
 requireDir('./tasks', { recurse: true });
