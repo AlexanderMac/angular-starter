@@ -2,9 +2,9 @@
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-var webpack           = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var helpers           = require('./helpers');
+let webpack           = require('webpack');
+let HtmlWebpackPlugin = require('html-webpack-plugin');
+let helpers           = require('./helpers');
 
 module.exports = {
   entry: {
@@ -25,15 +25,15 @@ module.exports = {
       },
       {
         test: /\.pug$/,
-        loader: 'pug-html?pretty'
+        loader: ['raw-loader', 'pug-html-loader?pretty']
       },
       {
         test: /\.css$/,
-        loader: 'raw'
+        loader: 'raw-loader'
       },
       {
         test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
-        loader: 'file?name=assets/[name].[hash].[ext]'
+        loader: 'file-loader?name=assets/[name].[hash].[ext]'
       }
     ]
   },
@@ -44,8 +44,8 @@ module.exports = {
     }),
 
     new webpack.ContextReplacementPlugin(
-      /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
-      helpers.root('./src')
+      /angular(\\|\/)core(\\|\/)@angular/,
+      helpers.root('src', 'app')
     ),
 
     new HtmlWebpackPlugin({

@@ -1,9 +1,9 @@
 'use strict';
 
-var webpack           = require('webpack');
-var webpackMerge      = require('webpack-merge');
-var commonConfig      = require('./webpack.common.js');
-var helpers           = require('./helpers');
+let webpack           = require('webpack');
+let webpackMerge      = require('webpack-merge');
+let commonConfig      = require('./webpack.common.js');
+let helpers           = require('./helpers');
 
 const METADATA = {
   env: 'development',

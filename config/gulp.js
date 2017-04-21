@@ -5,7 +5,7 @@ const TASKS  = './tasks/';
 const APP    = './src/';
 const DIST   = './dist';
 
-var config = {
+let config = {
   filters: {
     js: '*.js',
     jsDeep: '**/*.js',
