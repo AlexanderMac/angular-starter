@@ -1,6 +1,7 @@
 import '@angular/platform-browser';
 import '@angular/core';
 import '@angular/common';
+import 'bootstrap/dist/css/bootstrap.css';
 
 // TODO:
 // Other vendors for example jQuery, Lodash or Bootstrap
