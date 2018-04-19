@@ -1,6 +1,6 @@
 'use strict';
 
-let path = require('path');
+const path = require('path');
 
 const ROOT = path.resolve(__dirname, '../..');
 

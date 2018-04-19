@@ -2,9 +2,10 @@
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-let webpack           = require('webpack');
-let HtmlWebpackPlugin = require('html-webpack-plugin');
-let helpers           = require('./helpers');
+const webpack           = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const helpers           = require('./helpers');
 
 module.exports = {
   entry: {
@@ -18,10 +19,10 @@ module.exports = {
   },
 
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.ts$/,
-        loaders: ['awesome-typescript-loader', 'angular2-template-loader']
+        loader: ['awesome-typescript-loader', 'angular2-template-loader']
       },
       {
         test: /\.pug$/,
@@ -30,6 +31,13 @@ module.exports = {
       {
         test: /\.css$/,
         loader: 'raw-loader'
+      },
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: 'css-loader?minify'
+        })
       },
       {
         test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
@@ -44,9 +52,11 @@ module.exports = {
     }),
 
     new webpack.ContextReplacementPlugin(
-      /angular(\\|\/)core(\\|\/)@angular/,
+      /angular(\\|\/)core(\\|\/)/,
       helpers.root('src', 'app')
     ),
+
+    new ExtractTextPlugin('css/[name].css'),
 
     new HtmlWebpackPlugin({
       template: 'src/public/index.html'

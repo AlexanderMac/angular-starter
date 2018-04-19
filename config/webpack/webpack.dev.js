@@ -1,9 +1,9 @@
 'use strict';
 
-let webpack           = require('webpack');
-let webpackMerge      = require('webpack-merge');
-let commonConfig      = require('./webpack.common.js');
-let helpers           = require('./helpers');
+const webpack           = require('webpack');
+const webpackMerge      = require('webpack-merge');
+const commonConfig      = require('./webpack.common.js');
+const helpers           = require('./helpers');
 
 const METADATA = {
   env: 'development',
@@ -12,7 +12,7 @@ const METADATA = {
 };
 
 module.exports = webpackMerge(commonConfig, {
-  devtool: 'cheap-module-eval-source-map',
+  devtool: "source-map",
 
   output: {
     path: helpers.root('dist'),
