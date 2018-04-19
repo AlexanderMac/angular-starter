@@ -1,11 +1,10 @@
 'use strict';
 
-let gulp     = require('gulp');
-let gjshint  = require('gulp-jshint');
-let gtslint  = require('gulp-tslint');
-let gpuglint = require('gulp-pug-lint');
-let filters  = require('../config/gulp').filters;
-let paths    = require('../config/gulp').paths;
+const gulp     = require('gulp');
+const gtslint  = require('gulp-tslint');
+const gpuglint = require('gulp-pug-lint');
+const filters  = require('../config/gulp').filters;
+const paths    = require('../config/gulp').paths;
 
 gulp.task('lint-app', () => {
   return gulp
@@ -24,15 +23,4 @@ gulp.task('lint-views', () => {
     .pipe(gpuglint());
 });
 
-gulp.task('lint-tools', () => {
-  return gulp
-    .src([
-      paths.config + filters.jsDeep,
-      paths.tasks + filters.jsDeep
-    ])
-    .pipe(gjshint('.jshintrc'))
-    .pipe(gjshint.reporter('jshint-stylish'))
-    .pipe(gjshint.reporter('fail'));
-});
-
-gulp.task('lint', ['lint-app', 'lint-views', 'lint-tools']);
+gulp.task('lint', ['lint-app', 'lint-views']);
