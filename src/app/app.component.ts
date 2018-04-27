@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'as-app',
-  template: require('./app.pug'),
-  styles: [require('./app.component.css')]
+  selector: 'am-app',
+  template: require('./app.component.pug')
 })
-export class AppComponent {
-  click() {
-    console.log('Button clicked');
-  }
-}
+export class AppComponent { }

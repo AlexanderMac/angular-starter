@@ -1,0 +1,19 @@
+nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+  a.navbar-brand(routerLink="/") Angular Next starter
+  button.navbar-toggler(
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  )
+    span.navbar-toggler-icon
+  .collapse.navbar-collapse(id="navbarSupportedContent")
+    ul.navbar-nav.mr-auto
+      li.nav-item(routerLinkActive="active")
+        a.nav-link(routerLink="/home") Home
+          span.sr-only (current)
+      li.nav-item(routerLinkActive="active")
+        a.nav-link(routerLink="/users") Users
+    span.navbar-text Hello Guest
