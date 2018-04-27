@@ -13,7 +13,7 @@
 - **Framework**: Angular v5
 - **Language**: TypeScript v2
 - **Build tool**: webpack v3 (TODO: upgrade to v4)
-- **CSS preprocessor**: stylus (TODO: install)
+- **CSS preprocessor**: stylus
 - **CSS framework**: boostrap v4
 - **Template engine**: pug
 - **Task runner**: gulp

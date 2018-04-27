@@ -4,6 +4,7 @@
     "tslint:recommended"
   ],
   "rules": {
+    "arrow-parens": false,
     "callable-types": true,
     "class-name": false,
     "comment-format": [true, "check-space"],
@@ -70,7 +71,6 @@
         "variable-declaration": "nospace"
       }
     ],
-    "typeof-compare": true,
     "unified-signatures": true,
     "variable-name": false,
     "whitespace": [

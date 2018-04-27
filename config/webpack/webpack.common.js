@@ -2,10 +2,12 @@
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-const webpack           = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const helpers           = require('./helpers');
+const webpack            = require('webpack');
+const HtmlWebpackPlugin  = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ExtractTextPlugin  = require('extract-text-webpack-plugin');
+const NotifierPlugin     = require('webpack-notifier');
+const helpers            = require('./helpers');
 
 module.exports = {
   entry: {
@@ -35,8 +37,15 @@ module.exports = {
       {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract({
-            fallback: 'style-loader',
-            use: 'css-loader?minify'
+          fallback: 'style-loader',
+          use: 'css-loader?minify'
+        })
+      },
+      {
+        test: /\.styl$/,
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader?minify', 'stylus-loader']
         })
       },
       {
@@ -47,6 +56,12 @@ module.exports = {
   },
 
   plugins: [
+    new CleanWebpackPlugin(['dist'], {
+      root: helpers.root(),
+      verbose: false,
+      dry: false
+    }),
+
     new webpack.optimize.CommonsChunkPlugin({
       name: ['app', 'vendor', 'polyfills']
     }),
@@ -60,6 +75,12 @@ module.exports = {
 
     new HtmlWebpackPlugin({
       template: 'src/public/index.html'
+    }),
+
+    new NotifierPlugin({
+      title: 'app',
+      excludeWarnings: true,
+      skipFirstNotification: true
     })
   ]
 };
