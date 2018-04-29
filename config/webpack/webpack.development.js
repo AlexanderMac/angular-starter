@@ -5,12 +5,6 @@ const webpackMerge      = require('webpack-merge');
 const commonConfig      = require('./webpack.common.js');
 const helpers           = require('./helpers');
 
-const METADATA = {
-  env: 'development',
-  host: 'localhost',
-  port: 3000
-};
-
 module.exports = webpackMerge(commonConfig, {
   devtool: "source-map",
 
@@ -21,14 +15,6 @@ module.exports = webpackMerge(commonConfig, {
     chunkFilename: '[id].chunk.js',
     sourceMapFilename: '[name].map'
   },
-
-  plugins: [
-    new webpack.DefinePlugin({
-      'APP_ENV': METADATA.env,
-      'APP_URL': METADATA.host,
-      'APP_PORT': METADATA.port
-    })
-  ],
 
   devServer: {
     historyApiFallback: true,
