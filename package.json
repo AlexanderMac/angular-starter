@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --config ./config/webpack/webpack.development --progress --display-error-details",
     "build:production": "webpack --config ./config/webpack/webpack.production",
-    "start": "webpack-dev-server --config ./config/webpack/webpack.development --progress",
+    "start": "webpack-dev-server --config ./config/webpack/webpack.development",
     "lint": "gulp lint"
   },
   "dependencies": {

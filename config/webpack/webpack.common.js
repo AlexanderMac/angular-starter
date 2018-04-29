@@ -16,6 +16,14 @@ module.exports = {
     'app': './src/app/main.ts'
   },
 
+  output: {
+    path: helpers.root('dist'),
+    publicPath: '/',
+    filename: '[name].js',
+    chunkFilename: '[id].chunk.js',
+    sourceMapFilename: '[name].map'
+  },
+
   resolve: {
     extensions: ['.js', '.ts']
   },
