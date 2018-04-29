@@ -7,11 +7,13 @@ am-spinner(*ngIf="isLoading")
   table.table.table-striped.users
     thead
       tr
+        th(scope="col") #
         th(scope="col") Name
         th(scope="col") Email
         th.actions(scope="col")
     tbody
       tr(*ngFor="let user of users")
+        td {{ user.id }}
         td {{ user.name }}
         td {{ user.email }}
         td
@@ -19,4 +21,4 @@ am-spinner(*ngIf="isLoading")
           button.btn.btn-warning.btn-sm(title="Edit" '(click)'="editUser(user)" '[disabled]'="isSaving") Edit
           button.btn.btn-danger.btn-sm(title="Delete" '(click)'="deleteUser(user)" '[disabled]'="isSaving") Delete
       tr(*ngIf="users.length === 0")
-        td.text-center(colspan="3") No users
+        td.text-center(colspan="4") No users

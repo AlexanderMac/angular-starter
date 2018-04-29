@@ -25,8 +25,6 @@ export class UserFormComponent implements OnInit {
   ngOnInit() {
     if (!this.userId) {
       this.user = new User();
-      this.user.name = 'test';
-      this.user.email = 'test@mail.com';
     } else {
       this._loadUser();
     }
