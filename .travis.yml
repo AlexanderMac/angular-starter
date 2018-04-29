@@ -1,16 +1,18 @@
-before_script:
-  - npm install -g webpack
-  - npm install -g gulp
-
-script:
-  - npm build
-  - npm test
-
 language: node_js
 node_js:
   - "6"
   - "7"
   - "8"
+  - "node"
+
+install:
+  - npm i -g gulp
+  - npm i -g webpack
+  - npm i
+
+script:
+  - npm run build
+  - npm run lint
 
 notifications:
   email:

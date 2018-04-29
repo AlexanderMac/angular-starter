@@ -5,8 +5,9 @@
   "private": true,
   "scripts": {
     "build": "webpack --config ./config/webpack/webpack.dev --progress --display-error-details",
+    "build:production": "webpack --config ./config/webpack/webpack.production",
     "start": "webpack-dev-server --config ./config/webpack/webpack.dev --progress --port 3001",
-    "test": "gulp lint"
+    "lint": "gulp lint"
   },
   "dependencies": {
     "@angular/common": "^5.2.10",
