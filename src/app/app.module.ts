@@ -17,6 +17,9 @@ import { UsersModule }   from './users/module';
     HomeModule,
     UsersModule
   ],
+  providers: [
+    { provide: Window, useValue: window }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

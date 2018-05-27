@@ -5,8 +5,8 @@ import * as _         from 'lodash';
 
 @Injectable()
 export class MemoryRepoService {
-  private models: any[];
-  private nextId: number;
+  protected models: any[];
+  protected nextId: number;
 
   constructor() {
     this.models = [];
@@ -28,7 +28,7 @@ export class MemoryRepoService {
     return of(model);
   }
 
-  update(modelData: any) {
+  update(modelData: any): Observable<any> {
     let model = _.find(this.models, { id: modelData.id });
     _.extend(model, modelData);
     return of(model);
