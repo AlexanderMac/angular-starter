@@ -9,7 +9,7 @@ export class LocalStorageRepoService extends MemoryRepoService {
   private localStorage: Storage;
   private collectionName: string;
 
-  constructor(private window: Window) {
+  constructor(window: Window) {
     super();
     this.localStorage = window.localStorage;
   }
