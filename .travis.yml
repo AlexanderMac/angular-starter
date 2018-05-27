@@ -5,6 +5,9 @@ node_js:
   - "8"
   - "node"
 
+before_install:
+  - npm i -g npm@5.7.1
+
 install:
   - npm i -g gulp
   - npm i -g webpack
