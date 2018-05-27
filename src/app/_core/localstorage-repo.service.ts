@@ -1,6 +1,5 @@
 import { Injectable }        from '@angular/core';
 import { Observable }        from 'rxjs/Observable';
-import { of }                from 'rxjs/observable/of';
 import * as _                from 'lodash';
 import { MemoryRepoService } from './memory-repo.service';
 
@@ -38,20 +37,20 @@ export class LocalStorageRepoService extends MemoryRepoService {
   }
 
   create(model: any): Observable<any> {
-    let createdModel = super.create(model);
-    this.save();
-    return of(createdModel);
+    let obs = super.create(model);
+    obs.subscribe(() => this.save());
+    return obs;
   }
 
   update(modelData: any): Observable<any> {
-    let updatedModel = super.update(modelData);
-    this.save();
-    return of(updatedModel);
+    let obs = super.update(modelData);
+    obs.subscribe(() => this.save());
+    return obs;
   }
 
   delete(id: any): Observable<boolean> {
-    let result = super.delete(id);
-    this.save();
-    return of(!!result);
+    let obs = super.delete(id);
+    obs.subscribe(() => this.save());
+    return obs;
   }
 }
