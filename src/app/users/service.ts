@@ -1,29 +1,31 @@
-import { Injectable }        from '@angular/core';
-import { Observable }        from 'rxjs/Observable';
-import { MemoryRepoService } from '../_core/memory-repo.service';
-import { User }              from './model';
+import { Injectable }              from '@angular/core';
+import { Observable }              from 'rxjs/Observable';
+import { LocalStorageRepoService } from '../_core/localstorage-repo.service';
+import { User }                    from './model';
 
 @Injectable()
 export class UserService {
-  constructor(private memoryRepoSrvc: MemoryRepoService) {}
+  constructor(private repoSrvc: LocalStorageRepoService) {
+    this.repoSrvc.init('Users');
+  }
 
   getUser(id: number): Observable<User> {
-    return this.memoryRepoSrvc.getOne(id);
+    return this.repoSrvc.getOne(id);
   }
 
   getUsers(): Observable<User[]> {
-    return this.memoryRepoSrvc.getList();
+    return this.repoSrvc.getList();
   }
 
   createUser(user: User): Observable<User> {
-    return this.memoryRepoSrvc.create(user);
+    return this.repoSrvc.create(user);
   }
 
   updateUser(userData: any): Observable<User> {
-    return this.memoryRepoSrvc.update(userData);
+    return this.repoSrvc.update(userData);
   }
 
   deleteUser(id: number): Observable<boolean> {
-    return this.memoryRepoSrvc.delete(id);
+    return this.repoSrvc.delete(id);
   }
 }
