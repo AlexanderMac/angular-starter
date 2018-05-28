@@ -10,9 +10,9 @@
 - Clean code:)
 
 ### Set
-- **Framework**: Angular v5
+- **Framework**: Angular v6
 - **Language**: TypeScript v2
-- **Build tool**: webpack v3 (TODO: upgrade to v4)
+- **Build tool**: webpack v4
 - **CSS preprocessor**: stylus
 - **CSS framework**: boostrap v4
 - **Template engine**: pug
