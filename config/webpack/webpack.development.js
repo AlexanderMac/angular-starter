@@ -1,15 +1,16 @@
 'use strict';
 
-const webpack           = require('webpack');
-const webpackMerge      = require('webpack-merge');
-const commonConfig      = require('./webpack.common.js');
-const helpers           = require('./helpers');
+const webpackMerge = require('webpack-merge');
+const commonConfig = require('./webpack.common.js');
+const helpers      = require('./helpers');
 
 module.exports = webpackMerge(commonConfig, {
-  devtool: "source-map",
+  mode: 'development',
+
+  devtool: 'inline-source-map',
 
   devServer: {
-    historyApiFallback: true,
+    contentBase: helpers.root('dist'),
     compress: true,
     port: 3001
   }
