@@ -12,7 +12,7 @@
 ### Set
 - **Framework**: Angular v6
 - **Language**: TypeScript v2
-- **Build tool**: webpack v4
+- **Build tool**: Webpack v4
 - **CSS preprocessor**: stylus
 - **CSS framework**: boostrap v4
 - **Template engine**: pug
