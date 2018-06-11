@@ -3,7 +3,6 @@ import { Observable }        from 'rxjs/Observable';
 import * as _                from 'lodash';
 import { MemoryRepoService } from './memory-repo.service';
 
-@Injectable()
 export class LocalStorageRepoService extends MemoryRepoService {
   private localStorage: Storage;
   private collectionName: string;
@@ -52,5 +51,13 @@ export class LocalStorageRepoService extends MemoryRepoService {
     let obs = super.delete(id);
     obs.subscribe(() => this.save());
     return obs;
+  }
+}
+
+@Injectable()
+export class LocalStorageRepoServiceFactory {
+  getInstance(window: Window) {
+    let instance = new LocalStorageRepoService(window);
+    return instance;
   }
 }

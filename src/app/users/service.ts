@@ -1,11 +1,15 @@
-import { Injectable }              from '@angular/core';
-import { Observable }              from 'rxjs/Observable';
-import { LocalStorageRepoService } from '../_core/localstorage-repo.service';
-import { User }                    from './model';
+import { Injectable }                     from '@angular/core';
+import { Observable }                     from 'rxjs/Observable';
+import { LocalStorageRepoService,
+         LocalStorageRepoServiceFactory } from '../_core/localstorage-repo.service';
+import { User }                           from './model';
 
 @Injectable()
 export class UserService {
-  constructor(private repoSrvc: LocalStorageRepoService) {
+  private repoSrvc: LocalStorageRepoService;
+
+  constructor(factory: LocalStorageRepoServiceFactory) {
+    this.repoSrvc = factory.getInstance(window);
     this.repoSrvc.init('Users');
   }
 
