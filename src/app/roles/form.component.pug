@@ -1,0 +1,29 @@
+am-navbar
+
+am-spinner(*ngIf="isLoading")
+.container(*ngIf="!isLoading && role")
+  h2
+    span(*ngIf="roleId") Edit Role {{ role.name }}
+    span(*ngIf="!roleId") Create Role
+    hr
+
+  form(#roleForm="ngForm" '(ngSubmit)'="saveRole()")
+    .form-group.row
+      label.col-md-3.col-form-label(for="name") Name*
+      .col-md-9
+        input.form-control(
+          id="name"
+          name="name"
+          type="text"
+          placeholder="Name"
+          required="true"
+          #name="ngModel"
+          '[(ngModel)]'="role.name"
+          '[disabled]'="isSaving"
+          '[ngClass]'="{ 'is-invalid': name.invalid && (name.dirty || name.touched) }"
+        )
+        .invalid-feedback Name is required
+
+    .buttons.text-right
+      a.btn.btn-light(routerLink="/roles") Cancel
+      button.btn.btn-primary(type="submit" '[disabled]'="!roleForm.form.valid || isSaving") Save

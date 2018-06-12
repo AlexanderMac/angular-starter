@@ -5,8 +5,7 @@
 
 ### Features
 - TypeScript
-- Configured Webpack
-- User CRUD
+- Users/Roles CRUD
 - Clean code:)
 
 ### Set

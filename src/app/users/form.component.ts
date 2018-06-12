@@ -1,3 +1,4 @@
+import * as _                     from 'lodash';
 import { Component, OnInit }      from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationService }    from '../_core/notification.service';
@@ -22,20 +23,22 @@ export class UserFormComponent implements OnInit {
     this.userId = +this.activatedRoute.snapshot.params.id;
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     if (!this.userId) {
       this.user = new User();
+      this.user.roles = [];
     } else {
       this._loadUser();
     }
   }
 
-  _loadUser() {
+  _loadUser(): void {
     this.isLoading = true;
-    return this.userSrvc
+    this.userSrvc
       .getUser(this.userId)
       .subscribe(
         user => {
+          user.roles = _.map(user.roles, r => +r);
           this.user = user;
         },
         err => {
@@ -46,7 +49,11 @@ export class UserFormComponent implements OnInit {
       );
   }
 
-  saveUser() {
+  rolesChange(roles: number[]) {
+    this.user.roles = roles;
+  }
+
+  saveUser(): void {
     this.isSaving = true;
     let fn = this.userId ? 'updateUser' : 'createUser';
     this.userSrvc[fn](this.user)
