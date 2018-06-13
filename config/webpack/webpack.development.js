@@ -12,6 +12,7 @@ module.exports = webpackMerge(commonConfig, {
   devServer: {
     contentBase: helpers.root('dist'),
     compress: true,
-    port: 3001
+    port: 3001,
+    historyApiFallback: true
   }
 });

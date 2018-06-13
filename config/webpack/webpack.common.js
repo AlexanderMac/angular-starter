@@ -23,7 +23,7 @@ module.exports = {
     path: helpers.root('dist'),
     publicPath: '/',
     filename: '[name].js',
-    chunkFilename: '[id].js',
+    chunkFilename: '[name].js',
     sourceMapFilename: '[name].map'
   },
 
@@ -47,7 +47,11 @@ module.exports = {
     rules: [
       {
         test: /\.ts$/,
-        loader: ['awesome-typescript-loader', 'angular2-template-loader']
+        exclude: /(node_modules)/,
+        loader: [
+          'awesome-typescript-loader',
+          'angular2-template-loader'
+        ]
       },
       {
         test: /\.json$/,
@@ -55,6 +59,7 @@ module.exports = {
       },
       {
         test: /\.pug$/,
+        exclude: /(node_modules)/,
         loaders: [
           'raw-loader',
           'pug-html-loader'
@@ -73,6 +78,7 @@ module.exports = {
       },
       {
         test: /\.styl$/,
+        exclude: /(node_modules)/,
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader?minify',
@@ -108,7 +114,7 @@ module.exports = {
 
     new MiniCssExtractPlugin({
       filename: 'css/[name].css',
-      chunkFilename: 'css/[id].css'
+      chunkFilename: 'css/[name].css'
     }),
 
     new ProgressBarPlugin({
