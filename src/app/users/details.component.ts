@@ -1,9 +1,15 @@
+import * as _                     from 'lodash';
 import { Component, OnInit }      from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { forkJoin }               from 'rxjs/observable/forkJoin';
 import { NotificationService }    from '../_core/notification.service';
 import { UserService }            from './service';
 import { RoleService }            from '../roles/service';
 import { User }                   from './model';
+
+class UserEx extends User {
+  rolesStr: string;
+}
 
 @Component({
   selector: 'am-user-details',
@@ -13,7 +19,7 @@ export class UserDetailsComponent implements OnInit {
   isLoading: boolean;
   isSaving: boolean;
   userId: number;
-  user: User;
+  user: UserEx;
 
   constructor(
     private router: Router,
@@ -29,38 +35,26 @@ export class UserDetailsComponent implements OnInit {
   }
 
   _loadUser(): void {
-    /* TODO: RolesCRUD:
     this.isLoading = true;
-    return this.ngQSrvc
-      .all([
-        this.roleSrvc.getRoles(),
-        this.userSrvc.getUser(this.userId)
-      ])
-      .then(([roles, user]) => {
-        user.roles = _.chain(user.roles)
+    forkJoin(
+      this.roleSrvc.getRoles(),
+      this.userSrvc.getUser(this.userId)
+    )
+    .subscribe(
+      ([roles, user]) => {
+        this.user = (user as UserEx);
+        this.user.rolesStr = _.chain(user.roles)
           .map(userRoleId => _.find(roles, { id: +userRoleId }))
           .map(role => role ? role.name : '')
           .compact()
           .join(',')
           .value();
-        this.user = user;
-      })
-      .catch(err => {
-        this.notificationSrvc.error(err, 'Unable to load user');
-        this.ngLocationSrvc.path('/users');
-      })
-      .finally(() => this.isLoading = false);
-    */
-    this.isLoading = true;
-    this.userSrvc
-      .getUser(this.userId)
-      .subscribe(
-        user => this.user = user,
-        err => {
-          this.ntfsSrvc.error('Unable to load user');
-          this.router.navigate(['/users']);
-       },
-       () => this.isLoading = false
+      },
+      err => {
+        this.ntfsSrvc.error('Unable to load user');
+        this.router.navigate(['/users']);
+      },
+      () => this.isLoading = false
     );
   }
 }

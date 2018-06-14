@@ -1,10 +1,15 @@
 import * as _                  from 'lodash';
 import { Component, OnInit }   from '@angular/core';
 import { Router }              from '@angular/router';
+import { forkJoin }            from 'rxjs/observable/forkJoin';
 import { NotificationService } from '../_core/notification.service';
 import { UserService }         from './service';
 import { RoleService }         from '../roles/service';
 import { User }                from './model';
+
+class UserEx extends User {
+  rolesStr: string;
+}
 
 @Component({
   selector: 'am-user-list',
@@ -13,7 +18,7 @@ import { User }                from './model';
 export class UserListComponent implements OnInit {
   isLoading: boolean;
   isSaving: boolean;
-  users: User[];
+  users: UserEx[];
 
   constructor(
     private router: Router,
@@ -27,35 +32,27 @@ export class UserListComponent implements OnInit {
   }
 
   _loadUsers(): void {
-    /* TODO: RolesCRUD:
     this.isLoading = true;
-    return this.ngQSrvc
-      .all([
-        this.roleSrvc.getRoles(),
-        this.userSrvc.getUsers()
-      ])
-      .then(([roles, users]) => {
-        _.each(users, user => {
-          user.roles = _.chain(user.roles)
+    forkJoin(
+      this.roleSrvc.getRoles(),
+      this.userSrvc.getUsers()
+    )
+    .subscribe(
+      ([roles, users]) => {
+        this.users = _.map(users, user => {
+          let userEx = user as UserEx;
+          userEx.rolesStr = _.chain(user.roles)
             .map(userRoleId => _.find(roles, { id: +userRoleId }))
             .map(role => role ? role.name : '')
             .compact()
             .join(',')
             .value();
+          return userEx;
         });
-        this.users = users;
-      })
-      .catch(err => this.notificationSrvc.error(err, 'Unable to load users'))
-      .finally(() => this.isLoading = false);
-    */
-    this.isLoading = true;
-    this.userSrvc
-      .getUsers()
-      .subscribe(
-        users => this.users = users,
-        () => this.ntfsSrvc.error('Unable to load users'),
-        () => this.isLoading = false
-      );
+      },
+      () => this.ntfsSrvc.error('Unable to load users'),
+      () => this.isLoading = false
+    );
   }
 
   userDetails(user: User): void {
