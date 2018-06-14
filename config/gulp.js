@@ -11,10 +11,8 @@ let config = {
     jsDeep: '**/*.js',
     ts: '*.ts',
     tsDeep: '**/*.ts',
-    // TODO: styl is used?
     styl: '*.styl',
     stylDeep: '**/*.styl',
-    // TODO: css is used?
     css: '*.css',
     cssDeep: '**/*.css',
     pug: '*.pug',
