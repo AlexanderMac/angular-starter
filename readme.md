@@ -1,5 +1,5 @@
 # angular-next-starter
-`Angular next (v2+)` project template.
+`Angular next (v2+)` project template. Check [angular-starter](https://github.com/AlexanderMac/angular-starter) if you need an example for AngularJs.
 
 [![Build Status](https://travis-ci.org/AlexanderMac/angular-next-starter.svg?branch=master)](https://travis-ci.org/AlexanderMac/angular-next-starter)
 
