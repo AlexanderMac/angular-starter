@@ -21,12 +21,12 @@ export class RoleService {
     return this.repoSrvc.getList();
   }
 
-  createRole(user: Role): Observable<Role> {
-    return this.repoSrvc.create(user);
+  createRole(role: Role): Observable<Role> {
+    return this.repoSrvc.create(role);
   }
 
-  updateRole(userData: any): Observable<Role> {
-    return this.repoSrvc.update(userData);
+  updateRole(roleData: any): Observable<Role> {
+    return this.repoSrvc.update(roleData);
   }
 
   deleteRole(id: number): Observable<boolean> {
