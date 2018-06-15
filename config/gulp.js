@@ -1,7 +1,5 @@
 'use strict';
 
-const CONFIG = './config/';
-const TASKS  = './tasks/';
 const APP    = './src/';
 const DIST   = './dist';
 
@@ -11,17 +9,15 @@ let config = {
     jsDeep: '**/*.js',
     ts: '*.ts',
     tsDeep: '**/*.ts',
-    styl: '*.styl',
-    stylDeep: '**/*.styl',
     css: '*.css',
     cssDeep: '**/*.css',
+    styl: '*.styl',
+    stylDeep: '**/*.styl',
     pug: '*.pug',
     pugDeep: '**/*.pug'
   },
 
   paths: {
-    config: CONFIG,
-    tasks: TASKS,
     app: APP,
     dist: DIST
   }
