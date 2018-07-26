@@ -1,7 +1,7 @@
 {
-  "name": "angular-next-starter",
+  "name": "angular-starter",
   "version": "1.0.0",
-  "description": "angular-next-starter",
+  "description": "angular-starter",
   "private": true,
   "scripts": {
     "build": "webpack --config ./config/webpack/webpack.development",
@@ -59,12 +59,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/AlexanderMac/angular-next-starter"
+    "url": "https://github.com/AlexanderMac/angular-starter"
   },
   "author": "Alexander Mac",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/AlexanderMac/angular-next-starter/issues"
+    "url": "https://github.com/AlexanderMac/angular-starter/issues"
   },
-  "homepage": "https://github.com/AlexanderMac/angular-next-starter"
+  "homepage": "https://github.com/AlexanderMac/angular-starter"
 }
