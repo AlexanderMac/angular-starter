@@ -2,7 +2,7 @@
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-const Webpack              = require('webpack');
+const webpack              = require('webpack');
 const CleanPlugin          = require('clean-webpack-plugin');
 const HtmlPlugin           = require('html-webpack-plugin');
 const ProgressBarPlugin    = require('progress-bar-webpack-plugin');
@@ -144,7 +144,7 @@ module.exports = {
     }),
 
     // To hide `Critical dependency: the request of a dependency is an expression` warning
-    new Webpack.ContextReplacementPlugin(
+    new webpack.ContextReplacementPlugin(
       /angular(\\|\/)core(\\|\/)/,
       helpers.root('src', 'app')
     ),
