@@ -1,13 +1,13 @@
-import { Injectable }        from '@angular/core';
-import { Observable }        from 'rxjs/Observable';
-import * as _                from 'lodash';
-import { MemoryRepoService } from './memory-repo.service';
+import { Injectable }      from '@angular/core';
+import { Observable }      from 'rxjs/Observable';
+import * as _              from 'lodash';
+import { BaseRepoService } from './base-repo.service';
 
-export class LocalStorageRepoService extends MemoryRepoService {
+export class LocalStorageRepoService extends BaseRepoService {
   private localStorage: Storage;
   private collectionName: string;
 
-  constructor(window: Window) {
+  constructor() {
     super();
     this.localStorage = window.localStorage;
   }
@@ -18,11 +18,11 @@ export class LocalStorageRepoService extends MemoryRepoService {
   }
 
   load(): void {
-    let modelsStr = this.localStorage.getItem(this.collectionName);
-    if (modelsStr) {
-      let models = _.attempt(JSON.parse.bind(null, modelsStr)) as any[];
-      this.models = _.isError(models) ? [] : models;
-      let nextIdStr = _.chain(this.models)
+    let objsStr = this.localStorage.getItem(this.collectionName);
+    if (objsStr) {
+      let parseResult = _.attempt(JSON.parse.bind(null, objsStr)) as any[];
+      this.objects = _.isError(parseResult) ? [] : parseResult;
+      let nextIdStr = _.chain(this.objects)
         .map('id')
         .max()
         .value();
@@ -31,18 +31,18 @@ export class LocalStorageRepoService extends MemoryRepoService {
   }
 
   save(): void {
-    let modelsStr = JSON.stringify(this.models);
-    this.localStorage.setItem(this.collectionName, modelsStr);
+    let objsStr = JSON.stringify(this.objects);
+    this.localStorage.setItem(this.collectionName, objsStr);
   }
 
-  create(model: any): Observable<any> {
-    let obs = super.create(model);
+  create(obj: any): Observable<any> {
+    let obs = super.create(obj);
     obs.subscribe(() => this.save());
     return obs;
   }
 
-  update(modelData: any): Observable<any> {
-    let obs = super.update(modelData);
+  update(objData: any): Observable<any> {
+    let obs = super.update(objData);
     obs.subscribe(() => this.save());
     return obs;
   }
@@ -56,8 +56,8 @@ export class LocalStorageRepoService extends MemoryRepoService {
 
 @Injectable()
 export class LocalStorageRepoServiceFactory {
-  getInstance(window: Window) {
-    let instance = new LocalStorageRepoService(window);
+  getInstance() {
+    let instance = new LocalStorageRepoService();
     return instance;
   }
 }

@@ -9,7 +9,7 @@ export class RoleService {
   private repoSrvc: LocalStorageRepoService;
 
   constructor(factory: LocalStorageRepoServiceFactory) {
-    this.repoSrvc = factory.getInstance(window);
+    this.repoSrvc = factory.getInstance();
     this.repoSrvc.init('Roles');
   }
 
