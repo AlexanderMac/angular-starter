@@ -7,6 +7,8 @@ import { UserListComponent }    from './list.component';
 import { UserFormComponent }    from './form.component';
 import { UserDetailsComponent } from './details.component';
 import { UserService }          from './service';
+import { UserLocalStrgService } from './service/local-storage';
+import { UserHttpService }      from './service/http';
 
 import './styles.styl';
 
@@ -28,7 +30,9 @@ import './styles.styl';
     RolesModule
   ],
   providers: [
-    UserService
+    UserService,
+    UserLocalStrgService,
+    UserHttpService
   ]
 })
 export class UsersModule { }

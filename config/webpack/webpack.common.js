@@ -149,6 +149,10 @@ module.exports = {
       helpers.root('src', 'app')
     ),
 
+    new webpack.DefinePlugin({
+      SRVC_TYPE: JSON.stringify(process.env.SRVC_TYPE || 'local-storage')
+    }),
+
     new HtmlPlugin({
       template: 'src/public/index.pug'
     }),

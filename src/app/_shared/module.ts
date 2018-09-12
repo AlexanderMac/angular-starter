@@ -1,7 +1,8 @@
 import { NgModule }          from '@angular/core';
-import { RouterModule }      from '@angular/router';
 import { CommonModule }      from '@angular/common';
+import { RouterModule }      from '@angular/router';
 import { FormsModule }       from '@angular/forms';
+import { HttpClientModule }  from '@angular/common/http';
 import { NavbarComponent }   from './navbar.component';
 import { SpinnerComponent }  from './spinner.component';
 
@@ -12,13 +13,15 @@ import { SpinnerComponent }  from './spinner.component';
   ],
   imports: [
     CommonModule,
+    RouterModule,
     FormsModule,
-    RouterModule
+    HttpClientModule
   ],
   exports: [
     CommonModule,
-    FormsModule,
     RouterModule,
+    FormsModule,
+    HttpClientModule,
     NavbarComponent,
     SpinnerComponent
   ]
