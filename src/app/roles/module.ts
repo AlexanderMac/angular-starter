@@ -7,6 +7,8 @@ import { RoleFormComponent }          from './form.component';
 import { RoleDetailsComponent }       from './details.component';
 import { RoleMultiselectorComponent } from './multiselector.component';
 import { RoleService }                from './service';
+import { RoleLocalStrgService }       from './service/local-storage';
+import { RoleHttpService }            from './service/http';
 
 import './styles.styl';
 
@@ -31,7 +33,9 @@ import './styles.styl';
     RoleMultiselectorComponent
   ],
   providers: [
-    RoleService
+    RoleService,
+    RoleLocalStrgService,
+    RoleHttpService
   ]
 })
 export class RolesModule { }

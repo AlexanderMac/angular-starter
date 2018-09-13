@@ -1,11 +1,11 @@
 import { Injectable }                     from '@angular/core';
 import { Observable }                     from 'rxjs/Observable';
 import { LocalStorageRepoService,
-         LocalStorageRepoServiceFactory } from '../_core/localstorage-repo.service';
-import { Role }                           from './model';
+         LocalStorageRepoServiceFactory } from '../../_core/localstorage-repo.service';
+import { Role }                           from '../model';
 
 @Injectable()
-export class RoleService {
+export class RoleLocalStrgService {
   private repoSrvc: LocalStorageRepoService;
 
   constructor(factory: LocalStorageRepoServiceFactory) {

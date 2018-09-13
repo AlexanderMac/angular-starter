@@ -8,6 +8,7 @@
 ### Features
 - TypeScript
 - Users/Roles CRUD
+- Using LocalStorage or HttpClient as a source data
 - Clean code:)
 
 ### Set
