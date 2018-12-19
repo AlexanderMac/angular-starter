@@ -111,7 +111,6 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          'raw-loader',
           MiniCssExtractPlugin.loader,
           'css-loader'
         ]
@@ -164,7 +163,7 @@ module.exports = {
 
     new ProgressBarPlugin({
       format: 'Build [:bar] :percent (:elapsed seconds)',
-      clear: false,
+      clear: false
     }),
 
     new NotifierPlugin({
