@@ -7,7 +7,7 @@ import { Role }        from '../model';
 const USERS_URL = '/roles/';
 const HTTP_OPTIONS = {
   headers: new HttpHeaders({
-    'Content-Type':  'application/json'
+    'Content-Type': 'application/json'
   })
 };
 
