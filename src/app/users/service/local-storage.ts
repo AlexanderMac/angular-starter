@@ -1,8 +1,10 @@
-import { Injectable }                     from '@angular/core';
-import { Observable }                     from 'rxjs/Observable';
-import { LocalStorageRepoService,
-         LocalStorageRepoServiceFactory } from '../../_core/localstorage-repo.service';
-import { User }                           from '../model';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import {
+  LocalStorageRepoService,
+  LocalStorageRepoServiceFactory
+} from '../../_core/localstorage-repo.service';
+import { User } from '../model';
 
 @Injectable()
 export class UserLocalStrgService {

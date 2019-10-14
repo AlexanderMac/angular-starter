@@ -1,15 +1,9 @@
-import { Injectable }  from '@angular/core';
-import { HttpClient,
-         HttpHeaders } from '@angular/common/http';
-import { Observable }  from 'rxjs/Observable';
-import { Role }        from '../model';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { Role } from '../model';
 
 const USERS_URL = '/roles/';
-const HTTP_OPTIONS = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json'
-  })
-};
 
 @Injectable()
 export class RoleHttpService {
@@ -24,11 +18,11 @@ export class RoleHttpService {
   }
 
   createRole(role: Role): Observable<Role> {
-    return this.httpSrvc.post<Role>(USERS_URL, role, HTTP_OPTIONS);
+    return this.httpSrvc.post<Role>(USERS_URL, role);
   }
 
   updateRole(roleData: any): Observable<Role> {
-    return this.httpSrvc.put<Role>(USERS_URL + roleData.id, roleData, HTTP_OPTIONS);
+    return this.httpSrvc.put<Role>(USERS_URL + roleData.id, roleData);
   }
 
   deleteRole(id: number): Observable<boolean> {

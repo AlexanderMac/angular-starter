@@ -1,22 +1,27 @@
-import * as _          from 'lodash';
-import { Component,
-        OnInit,
-        EventEmitter } from '@angular/core';
+import * as _ from 'lodash';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  OnDestroy
+} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { RoleService } from './service';
-import { Role }        from './model';
+import { Role } from './model';
 
 @Component({
   selector: 'am-role-multiselector',
-  templateUrl: './multiselector.component.pug',
+  template: require('./multiselector.component.pug'),
   inputs: ['initialRoles'],
   outputs: ['changeRoles']
 })
-export class RoleMultiselectorComponent implements OnInit {
+export class RoleMultiselectorComponent implements OnInit, OnDestroy {
   roles: Role[];
   selectedRoles = {};
   isNoRoleSelected = true;
   initialRoles: number[];
   changeRoles = new EventEmitter();
+  subscriptions = new Subscription();
 
   constructor(private roleSrvc: RoleService) {}
 
@@ -24,8 +29,12 @@ export class RoleMultiselectorComponent implements OnInit {
     this._loadRoles();
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
+
   _loadRoles(): void {
-    this.roleSrvc
+    let subscription = this.roleSrvc
       .getRoles()
       .subscribe(
         roles => {
@@ -37,6 +46,7 @@ export class RoleMultiselectorComponent implements OnInit {
           this.isNoRoleSelected = _.isEmpty(this.selectedRoles);
         }
       );
+    this.subscriptions.add(subscription);
   }
 
   rolesChange(): void {

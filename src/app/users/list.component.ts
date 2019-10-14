@@ -1,11 +1,12 @@
-import * as _                  from 'lodash';
-import { Component, OnInit }   from '@angular/core';
-import { Router }              from '@angular/router';
-import { forkJoin }            from 'rxjs/observable/forkJoin';
+import * as _ from 'lodash';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subscription, forkJoin } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 import { NotificationService } from '../_core/notification.service';
-import { UserService }         from './service';
-import { RoleService }         from '../roles/service';
-import { User }                from './model';
+import { UserService } from './service';
+import { RoleService } from '../roles/service';
+import { User } from './model';
 
 class UserEx extends User {
   rolesStr: string;
@@ -15,10 +16,11 @@ class UserEx extends User {
   selector: 'am-user-list',
   template: require('./list.component.pug')
 })
-export class UserListComponent implements OnInit {
+export class UserListComponent implements OnInit, OnDestroy {
   isLoading: boolean;
   isSaving: boolean;
   users: UserEx[];
+  subscriptions = new Subscription();
 
   constructor(
     private router: Router,
@@ -28,31 +30,36 @@ export class UserListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._loadUsers();
+    this.loadUsers();
   }
 
-  _loadUsers(): void {
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
+
+  loadUsers(): void {
     this.isLoading = true;
-    forkJoin(
+    let subscription = forkJoin(
       this.roleSrvc.getRoles(),
       this.userSrvc.getUsers()
     )
-    .subscribe(
-      ([roles, users]) => {
-        this.users = _.map(users, user => {
-          let userEx = user as UserEx;
-          userEx.rolesStr = _.chain(user.roles)
-            .map(userRoleId => _.find(roles, { id: +userRoleId }))
-            .map(role => role ? role.name : '')
-            .compact()
-            .join(',')
-            .value();
-          return userEx;
-        });
-      },
-      () => this.ntfsSrvc.error('Unable to load users'),
-      () => this.isLoading = false
-    );
+      .pipe(finalize(() => this.isLoading = false))
+      .subscribe(
+        ([roles, users]) => {
+          this.users = _.map(users, user => {
+            let userEx = user as UserEx;
+            userEx.rolesStr = _.chain(user.roles)
+              .map(userRoleId => _.find(roles, { id: +userRoleId }))
+              .map(role => role ? role.name : '')
+              .compact()
+              .join(',')
+              .value();
+            return userEx;
+          });
+        },
+        (err: Error) => this.ntfsSrvc.warningOrError('Unable to load users', err),
+      );
+    this.subscriptions.add(subscription);
   }
 
   userDetails(user: User): void {
@@ -70,14 +77,16 @@ export class UserListComponent implements OnInit {
     }
 
     this.isSaving = true;
-    this.userSrvc
+    let subscription = this.userSrvc
       .deleteUser(user.id)
+      .pipe(finalize(() => this.isSaving = false))
       .subscribe(
         () => {
           _.remove(this.users, user);
           this.ntfsSrvc.info('User deleted successfully');
         },
-        () => this.ntfsSrvc.error('Unable to delete user'),
-        () => this.isSaving = false);
+        (err: Error) => this.ntfsSrvc.warningOrError('Unable to delete user', err)
+      );
+    this.subscriptions.add(subscription);
   }
 }

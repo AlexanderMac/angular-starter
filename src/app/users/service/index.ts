@@ -1,8 +1,8 @@
-import { Injectable }           from '@angular/core';
-import { Observable }           from 'rxjs/Observable';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { UserLocalStrgService } from './local-storage';
-import { UserHttpService }      from './http';
-import { User }                 from '../model';
+import { UserHttpService } from './http';
+import { User } from '../model';
 
 declare const SRVC_TYPE: string;
 

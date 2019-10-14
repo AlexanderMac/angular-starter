@@ -1,42 +1,51 @@
-import { Component, OnInit }      from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NotificationService }    from '../_core/notification.service';
-import { RoleService }            from './service';
-import { Role }                   from './model';
+import { Subscription } from 'rxjs';
+import { finalize } from 'rxjs/operators';
+import { NotificationService } from '../_core/notification.service';
+import { RoleService } from './service';
+import { Role } from './model';
 
 @Component({
   selector: 'am-role-details',
-  templateUrl: './details.component.pug'
+  template: require('./details.component.pug')
 })
-export class RoleDetailsComponent implements OnInit {
+export class RoleDetailsComponent implements OnInit, OnDestroy {
   isLoading: boolean;
   isSaving: boolean;
   roleId: number;
   role: Role;
+  subscriptions = new Subscription();
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private ntfsSrvc: NotificationService,
-    private roleSrvc: RoleService) {
-      this.roleId = +this.activatedRoute.snapshot.params.id;
+    private roleSrvc: RoleService
+  ) {
+    this.roleId = +this.activatedRoute.snapshot.params.id;
   }
 
   ngOnInit(): void {
-    this._loadRole();
+    this.loadRole();
   }
 
-  _loadRole(): void {
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
+
+  loadRole(): void {
     this.isLoading = true;
-    this.roleSrvc
+    let subscription = this.roleSrvc
       .getRole(this.roleId)
+      .pipe(finalize(() => this.isLoading = false))
       .subscribe(
         role => this.role = role,
-        err => {
-          this.ntfsSrvc.error('Unable to load role');
+        (err: Error) => {
+          this.ntfsSrvc.warningOrError('Unable to load role', err);
           this.router.navigate(['/roles']);
-       },
-       () => this.isLoading = false
-    );
+        }
+      );
+    this.subscriptions.add(subscription);
   }
 }

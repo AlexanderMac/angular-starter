@@ -12,13 +12,13 @@
 - Clean code:)
 
 ### Set
-- **Framework**: Angular v6
+- **Framework**: Angular v8
 - **Language**: TypeScript v2
 - **Build tool**: Webpack v4
 - **CSS preprocessor**: stylus
 - **CSS framework**: boostrap v4
 - **Template engine**: pug
-- **Linters**: tslint, pug-lint
+- **Linters**: eslint, pug-lint
 
 ### How to use
 ```sh

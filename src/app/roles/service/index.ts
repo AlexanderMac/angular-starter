@@ -1,8 +1,8 @@
-import { Injectable }           from '@angular/core';
-import { Observable }           from 'rxjs/Observable';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { RoleLocalStrgService } from './local-storage';
-import { RoleHttpService }      from './http';
-import { Role }                 from '../model';
+import { RoleHttpService } from './http';
+import { Role } from '../model';
 
 declare const SRVC_TYPE: string;
 

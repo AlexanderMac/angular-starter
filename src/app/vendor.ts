@@ -4,8 +4,9 @@ import '@angular/core';
 import '@angular/common';
 import '@angular/router';
 import '@angular/forms';
-import 'rxjs/Observable';
-import 'rxjs/observable/of';
+
+import 'rxjs';
+import 'rxjs/operators';
 import 'lodash';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'spinkit/css/spinkit.css';

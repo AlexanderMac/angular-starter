@@ -1,6 +1,6 @@
-import { Injectable }      from '@angular/core';
-import { Observable }      from 'rxjs/Observable';
-import * as _              from 'lodash';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import * as _ from 'lodash';
 import { BaseRepoService } from './base-repo.service';
 
 export class LocalStorageRepoService extends BaseRepoService {
@@ -12,7 +12,7 @@ export class LocalStorageRepoService extends BaseRepoService {
     this.localStorage = window.localStorage;
   }
 
-  init(collectionName: string) {
+  init(collectionName: string): void {
     this.collectionName = collectionName;
     this.load();
   }
@@ -56,7 +56,7 @@ export class LocalStorageRepoService extends BaseRepoService {
 
 @Injectable()
 export class LocalStorageRepoServiceFactory {
-  getInstance() {
+  getInstance(): LocalStorageRepoService {
     let instance = new LocalStorageRepoService();
     return instance;
   }

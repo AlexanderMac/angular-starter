@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/Observable';
-import { of }         from 'rxjs/observable/of';
-import * as _         from 'lodash';
+import { of } from 'rxjs/observable/of';
+import * as _ from 'lodash';
 
 interface IObject {
   id: any;

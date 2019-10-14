@@ -1,10 +1,10 @@
-import { NgModule }      from '@angular/core';
-import { RouterModule }  from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppComponent }  from './app.component';
-import { HomeModule }    from './home/module';
-import { UsersModule }   from './users/module';
-import { RolesModule }   from './roles/module';
+import { AppComponent } from './app.component';
+import { HomeModule } from './home/module';
+import { UsersModule } from './users/module';
+import { RolesModule } from './roles/module';
 
 @NgModule({
   declarations: [
@@ -13,7 +13,8 @@ import { RolesModule }   from './roles/module';
   imports: [
     BrowserModule,
     RouterModule.forRoot([
-      { path: '', redirectTo: '/home', pathMatch: 'full' }
+      { path: '', redirectTo: '/home', pathMatch: 'full' },
+      { path: '**', redirectTo: '/404' }
     ]),
     HomeModule,
     UsersModule,

@@ -14,11 +14,36 @@ export class NotificationService {
     Toastr.info(msg);
   }
 
-  warning(err: any): void {
-    Toastr.warning(err);
+  warning(msg: string, err?: any): void {
+    let fullMsg = this._getFullErrorMessage(msg, err);
+    Toastr.warning(fullMsg);
   }
 
-  error(err: any): void {
-    Toastr.error(err);
+  error(msg: string, err?: any): void {
+    let fullMsg = this._getFullErrorMessage(msg, err);
+    Toastr.error(fullMsg);
+  }
+
+  warningOrError(msg: string, err?: any): void {
+    let fullMsg = this._getFullErrorMessage(msg, err);
+    if (!err.status || err.status < 500) {
+      Toastr.warning(fullMsg);
+    } else {
+      Toastr.error(fullMsg);
+    }
+  }
+
+  private _getFullErrorMessage(msg: string, ngErr?: any): string {
+    let fullMsg = msg;
+    if (ngErr && ngErr.error) {
+      let err = ngErr.error;
+      if (err.message) {
+        fullMsg += '<br>' + err.message;
+      }
+      if (err.details) {
+        fullMsg += '<br>' + err.details;
+      }
+    }
+    return fullMsg;
   }
 }

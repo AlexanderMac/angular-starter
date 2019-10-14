@@ -1,18 +1,21 @@
-import * as _                  from 'lodash';
-import { Component, OnInit }   from '@angular/core';
-import { Router }              from '@angular/router';
+import * as _ from 'lodash';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 import { NotificationService } from '../_core/notification.service';
-import { RoleService }         from './service';
-import { Role }                from './model';
+import { RoleService } from './service';
+import { Role } from './model';
 
 @Component({
   selector: 'am-role-list',
   template: require('./list.component.pug')
 })
-export class RoleListComponent implements OnInit {
+export class RoleListComponent implements OnInit, OnDestroy {
   isLoading: boolean;
   isSaving: boolean;
   roles: Role[];
+  subscriptions = new Subscription();
 
   constructor(
     private router: Router,
@@ -24,15 +27,20 @@ export class RoleListComponent implements OnInit {
     this._loadRoles();
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
+
   _loadRoles(): void {
     this.isLoading = true;
-    this.roleSrvc
+    let subscription = this.roleSrvc
       .getRoles()
+      .pipe(finalize(() => this.isLoading = false))
       .subscribe(
         roles => this.roles = roles,
-        () => this.ntfsSrvc.error('Unable to load roles'),
-        () => this.isLoading = false
+        (err: Error) => this.ntfsSrvc.warningOrError('Unable to load roles', err)
       );
+    this.subscriptions.add(subscription);
   }
 
   roleDetails(role: Role): void {
@@ -50,14 +58,16 @@ export class RoleListComponent implements OnInit {
     }
 
     this.isSaving = true;
-    this.roleSrvc
+    let subscription = this.roleSrvc
       .deleteRole(role.id)
+      .pipe(finalize(() => this.isSaving = false))
       .subscribe(
         () => {
           _.remove(this.roles, role);
           this.ntfsSrvc.info('Role deleted successfully');
         },
-        () => this.ntfsSrvc.error('Unable to delete role'),
-        () => this.isSaving = false);
+        (err: Error) => this.ntfsSrvc.warningOrError('Unable to delete role', err)
+      );
+    this.subscriptions.add(subscription);
   }
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'home',
-  template: require('./component.pug')
+  selector: 'am-home',
+  template: require('./home.component.pug')
 })
 export class HomeComponent {}

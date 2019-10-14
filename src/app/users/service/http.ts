@@ -1,8 +1,10 @@
-import { Injectable }  from '@angular/core';
-import { HttpClient,
-         HttpHeaders } from '@angular/common/http';
-import { Observable }  from 'rxjs/Observable';
-import { User }        from '../model';
+import { Injectable } from '@angular/core';
+import {
+  HttpClient,
+  HttpHeaders
+} from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { User } from '../model';
 
 const USERS_URL = '/users/';
 const HTTP_OPTIONS = {
