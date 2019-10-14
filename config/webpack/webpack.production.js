@@ -1,5 +1,3 @@
-'use strict';
-
 const webpackMerge            = require('webpack-merge');
 const UglifyJsPlugin          = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');

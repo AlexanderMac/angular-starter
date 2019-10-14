@@ -16,6 +16,7 @@ coverage
 # Compiled
 build/Release
 dist
+public
 
 # Dependency directory
 node_modules

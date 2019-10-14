@@ -10,7 +10,7 @@ module.exports = webpackMerge(commonConfig, {
   devtool: 'inline-source-map',
 
   devServer: {
-    contentBase: helpers.root('dist'),
+    contentBase: helpers.root('public'),
     compress: true,
     port: 3001,
     historyApiFallback: true,
