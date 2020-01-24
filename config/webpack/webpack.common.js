@@ -1,12 +1,12 @@
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-const webpack                = require('webpack');
+const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const HtmlPlugin             = require('html-webpack-plugin');
-const ProgressBarPlugin      = require('progress-bar-webpack-plugin');
-const MiniCssExtractPlugin   = require('mini-css-extract-plugin');
-const NotifierPlugin         = require('webpack-notifier');
-const helpers                = require('./helpers');
+const HtmlPlugin = require('html-webpack-plugin');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const NotifierPlugin = require('webpack-notifier');
+const helpers = require('./helpers');
 
 module.exports = {
   stats: {
@@ -99,7 +99,12 @@ module.exports = {
         test: /\.pug$/,
         exclude: /(node_modules)/,
         use: [
-          'raw-loader',
+          {
+            loader: 'raw-loader',
+            options: {
+              esModule: false
+            }
+          },
           'pug-html-loader'
         ]
       },
