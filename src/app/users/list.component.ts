@@ -57,7 +57,7 @@ export class UserListComponent implements OnInit, OnDestroy {
             return userEx;
           });
         },
-        (err: Error) => this.ntfsSrvc.warningOrError('Unable to load users', err),
+        (err: Error) => this.ntfsSrvc.warningOrError('Unable to load users', err)
       );
     this.subscriptions.add(subscription);
   }
