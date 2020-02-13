@@ -12,8 +12,8 @@
 - Clean code:)
 
 ### Set
-- **Framework**: Angular v8
-- **Language**: TypeScript v2
+- **Framework**: Angular v9
+- **Language**: TypeScript v3
 - **Build tool**: Webpack v4
 - **CSS preprocessor**: stylus
 - **CSS framework**: boostrap v4
