@@ -1,9 +1,14 @@
 import * as Toastr from 'toastr';
 
+const WARNING_OPTS = { timeOut: 10000 };
+const ERROR_OPTS = { timeOut: 15000 };
+
 export class NotificationService {
   constructor() {
     Toastr.options.closeButton = true;
-    Toastr.options.closeDuration = 1000;
+    Toastr.options.timeOut = 3000;
+    Toastr.options.escapeHtml = true;
+    Toastr.options.preventDuplicates = true;
   }
 
   success(msg: string): void {
@@ -14,36 +19,43 @@ export class NotificationService {
     Toastr.info(msg);
   }
 
-  warning(msg: string, err?: any): void {
-    let fullMsg = this._getFullErrorMessage(msg, err);
-    Toastr.warning(fullMsg);
-  }
-
-  error(msg: string, err?: any): void {
-    let fullMsg = this._getFullErrorMessage(msg, err);
-    Toastr.error(fullMsg);
-  }
-
-  warningOrError(msg: string, err?: any): void {
-    let fullMsg = this._getFullErrorMessage(msg, err);
-    if (!err.status || err.status < 500) {
-      Toastr.warning(fullMsg);
+  warning(title: string, err?: any): void {
+    if (err) {
+      let errMsg = this._getErrorMessage(err);
+      Toastr.warning(errMsg, title, WARNING_OPTS);
     } else {
-      Toastr.error(fullMsg);
+      Toastr.warning(title, null, WARNING_OPTS);
     }
   }
 
-  private _getFullErrorMessage(msg: string, ngErr?: any): string {
-    let fullMsg = msg;
+  error(title: string, err?: any): void {
+    if (err) {
+      let errMsg = this._getErrorMessage(err);
+      Toastr.error(errMsg, title, ERROR_OPTS);
+    } else {
+      Toastr.error(title, null, ERROR_OPTS);
+    }
+  }
+
+  warningOrError(title: string, err?: any): void {
+    if (!err || !err.status || err.status < 500) {
+      this.warning(title, err);
+    } else {
+      this.error(title, err);
+    }
+  }
+
+  private _getErrorMessage(ngErr: any): string {
+    let errMsg = '';
     if (ngErr && ngErr.error) {
       let err = ngErr.error;
       if (err.message) {
-        fullMsg += '<br>' + err.message;
+        errMsg += err.message;
       }
       if (err.details) {
-        fullMsg += '<br>' + err.details;
+        errMsg += err.details;
       }
     }
-    return fullMsg;
+    return errMsg;
   }
 }
