@@ -42,7 +42,9 @@ export class RoleFormComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     let subscription = this.roleSrvc
       .getRole(this.roleId)
-      .pipe(finalize(() => this.isLoading = false))
+      .pipe(
+        finalize(() => this.isLoading = false)
+      )
       .subscribe(
         role => this.role = role,
         (err: Error) => {
@@ -57,7 +59,9 @@ export class RoleFormComponent implements OnInit, OnDestroy {
     this.isSaving = true;
     let fn = this.roleId ? 'updateRole' : 'createRole';
     let subscription = this.roleSrvc[fn](this.role)
-      .pipe(finalize(() => this.isSaving = false))
+      .pipe(
+        finalize(() => this.isSaving = false)
+      )
       .subscribe(
         () => {
           this.ntfsSrvc.info(`Role ${this.roleId ? 'updated' : 'created'} successfully`);

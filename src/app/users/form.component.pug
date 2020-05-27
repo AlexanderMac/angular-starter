@@ -17,9 +17,9 @@ am-spinner(*ngIf="isLoading")
           type="text"
           placeholder="Name"
           required="true"
+          #name="ngModel"
           '[(ngModel)]'="user.name"
           '[disabled]'="isSaving"
-          #name="ngModel"
           '[ngClass]'="{ 'is-invalid': name.invalid && (name.dirty || name.touched)}"
         )
         .invalid-feedback Name is required
@@ -33,16 +33,16 @@ am-spinner(*ngIf="isLoading")
           type="email"
           placeholder="Email"
           required="true"
+          #email="ngModel"
           '[(ngModel)]'="user.email"
           '[disabled]'="isSaving"
-          #email="ngModel"
           '[ngClass]'="{ 'is-invalid': email.invalid && (email.dirty || email.touched)}"
         )
         .invalid-feedback Email is required
 
     .form-group.form-check.row
       .offset-md-3.col-md-9
-        am-role-multiselector('[initialRoles]'="user.roles" '(changeRoles)'="rolesChange($event)")
+        am-role-multiselector('[initialRoles]'="user.roles" '(rolesChanged)'="rolesChanged($event)")
 
     .buttons.text-right
       a.btn.btn-light(routerLink="/users") Cancel

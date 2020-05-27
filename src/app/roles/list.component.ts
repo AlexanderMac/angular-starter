@@ -35,7 +35,9 @@ export class RoleListComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     let subscription = this.roleSrvc
       .getRoles()
-      .pipe(finalize(() => this.isLoading = false))
+      .pipe(
+        finalize(() => this.isLoading = false)
+      )
       .subscribe(
         roles => this.roles = roles,
         (err: Error) => this.ntfsSrvc.warningOrError('Unable to load roles', err)
@@ -60,7 +62,9 @@ export class RoleListComponent implements OnInit, OnDestroy {
     this.isSaving = true;
     let subscription = this.roleSrvc
       .deleteRole(role.id)
-      .pipe(finalize(() => this.isSaving = false))
+      .pipe(
+        finalize(() => this.isSaving = false)
+      )
       .subscribe(
         () => {
           _.remove(this.roles, role);

@@ -43,7 +43,9 @@ export class UserListComponent implements OnInit, OnDestroy {
       this.roleSrvc.getRoles(),
       this.userSrvc.getUsers()
     )
-      .pipe(finalize(() => this.isLoading = false))
+      .pipe(
+        finalize(() => this.isLoading = false)
+      )
       .subscribe(
         ([roles, users]) => {
           this.users = _.map(users, user => {
@@ -79,7 +81,9 @@ export class UserListComponent implements OnInit, OnDestroy {
     this.isSaving = true;
     let subscription = this.userSrvc
       .deleteUser(user.id)
-      .pipe(finalize(() => this.isSaving = false))
+      .pipe(
+        finalize(() => this.isSaving = false)
+      )
       .subscribe(
         () => {
           _.remove(this.users, user);

@@ -38,7 +38,9 @@ export class RoleDetailsComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     let subscription = this.roleSrvc
       .getRole(this.roleId)
-      .pipe(finalize(() => this.isLoading = false))
+      .pipe(
+        finalize(() => this.isLoading = false)
+      )
       .subscribe(
         role => this.role = role,
         (err: Error) => {

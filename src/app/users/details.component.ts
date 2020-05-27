@@ -47,7 +47,9 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
       this.roleSrvc.getRoles(),
       this.userSrvc.getUser(this.userId)
     )
-      .pipe(finalize(() => this.isLoading = false))
+      .pipe(
+        finalize(() => this.isLoading = false)
+      )
       .subscribe(
         ([roles, user]) => {
           this.user = user as UserEx;

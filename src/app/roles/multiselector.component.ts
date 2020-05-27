@@ -3,7 +3,9 @@ import {
   Component,
   EventEmitter,
   OnInit,
-  OnDestroy
+  OnDestroy,
+  Input,
+  Output
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { RoleService } from './service';
@@ -11,17 +13,17 @@ import { Role } from './model';
 
 @Component({
   selector: 'am-role-multiselector',
-  template: require('./multiselector.component.pug'),
-  inputs: ['initialRoles'],
-  outputs: ['changeRoles']
+  template: require('./multiselector.component.pug')
 })
 export class RoleMultiselectorComponent implements OnInit, OnDestroy {
   roles: Role[];
   selectedRoles = {};
   isNoRoleSelected = true;
-  initialRoles: number[];
-  changeRoles = new EventEmitter();
   subscriptions = new Subscription();
+
+  @Input() initialRoles: number[];
+
+  @Output() rolesChanged = new EventEmitter();
 
   constructor(private roleSrvc: RoleService) {}
 
@@ -55,6 +57,6 @@ export class RoleMultiselectorComponent implements OnInit, OnDestroy {
       .filter(roleId => this.selectedRoles[roleId])
       .value();
     this.isNoRoleSelected = roles.length === 0;
-    this.changeRoles.emit(roles);
+    this.rolesChanged.emit(roles);
   }
 }
