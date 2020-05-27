@@ -31,7 +31,7 @@ export class RoleListComponent implements OnInit, OnDestroy {
     this.subscriptions.unsubscribe();
   }
 
-  _loadRoles(): void {
+  private _loadRoles(): void {
     this.isLoading = true;
     let subscription = this.roleSrvc
       .getRoles()

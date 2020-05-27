@@ -1,17 +1,9 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpClient,
-  HttpHeaders
-} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../model';
 
 const USERS_URL = '/users/';
-const HTTP_OPTIONS = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json'
-  })
-};
 
 @Injectable()
 export class UserHttpService {
@@ -26,11 +18,11 @@ export class UserHttpService {
   }
 
   createUser(user: User): Observable<User> {
-    return this.httpSrvc.post<User>(USERS_URL, user, HTTP_OPTIONS);
+    return this.httpSrvc.post<User>(USERS_URL, user);
   }
 
   updateUser(userData: any): Observable<User> {
-    return this.httpSrvc.put<User>(USERS_URL + userData.id, userData, HTTP_OPTIONS);
+    return this.httpSrvc.put<User>(USERS_URL + userData.id, userData);
   }
 
   deleteUser(id: number): Observable<boolean> {

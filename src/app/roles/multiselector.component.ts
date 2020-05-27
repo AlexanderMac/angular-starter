@@ -35,7 +35,7 @@ export class RoleMultiselectorComponent implements OnInit, OnDestroy {
     this.subscriptions.unsubscribe();
   }
 
-  _loadRoles(): void {
+  private _loadRoles(): void {
     let subscription = this.roleSrvc
       .getRoles()
       .subscribe(
