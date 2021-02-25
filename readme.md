@@ -1,20 +1,17 @@
 # angular-starter
-`Angular (v2+)` start project template.
-- Check [angularjs-starter](https://github.com/AlexanderMac/angularjs-starter) if you need a starter for AngularJs.
-- Check [angular-hybrid-starter](https://github.com/AlexanderMac/angular-hybrid-starter) if you need a hybrid-app Angular starter.
+Boilerplate for creating Angular project.
 
-[![Build Status](https://travis-ci.org/AlexanderMac/angular-starter.svg?branch=master)](https://travis-ci.org/AlexanderMac/angular-starter)
+[![Build Status](https://github.com/AlexanderMac/angular-starter/workflows/CI/badge.svg)](https://github.com/AlexanderMac/angular-starter/actions?query=workflow%3ACI)
 
 ### Features
-- TypeScript
 - Users/Roles CRUD
 - Using LocalStorage or HttpClient as a source data
 - Clean code:)
 
 ### Set
-- **Framework**: Angular v9
-- **Language**: TypeScript v3
-- **Build tool**: Webpack v4
+- **Framework**: Angular v11
+- **Language**: TypeScript v4
+- **Build tool**: Webpack v5
 - **CSS preprocessor**: stylus
 - **CSS framework**: boostrap v4
 - **Template engine**: pug
