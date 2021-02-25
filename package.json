@@ -1,12 +1,12 @@
 {
   "name": "angular-starter",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "angular-starter",
   "private": true,
   "scripts": {
     "build": "webpack --config ./config/webpack/webpack.development",
     "build:production": "webpack --config ./config/webpack/webpack.production",
-    "start": "webpack-dev-server --config ./config/webpack/webpack.development",
+    "start": "webpack serve --config ./config/webpack/webpack.development",
     "lint-scripts": "eslint -f stylish 'src/**/*.ts'",
     "lint-views": "pug-lint src/app/**/*.pug",
     "lint": "npm run lint-scripts && npm run lint-views"
@@ -25,6 +25,7 @@
     "rxjs": "^6.5.5",
     "rxjs-compat": "^6.5.5",
     "toastr": "^2.1.4",
+    "webpack-cli": "^4.5.0",
     "zone.js": "^0.10.3"
   },
   "devDependencies": {
@@ -51,7 +52,6 @@
     "ts-loader": "^8.0.17",
     "typescript": "^4.2.2",
     "webpack": "^5.24.2",
-    "webpack-cli": "^4.5.0",
     "webpack-dev-server": "^3.11.2",
     "webpack-merge": "^5.7.3",
     "webpack-notifier": "^1.13.0"
