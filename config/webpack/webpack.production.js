@@ -1,8 +1,7 @@
-const webpack = require('webpack');
-const webpackMerge = require('webpack-merge');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const commonConfig = require('./webpack.common.js');
+const webpack = require('webpack')
+const { merge: webpackMerge } = require('webpack-merge')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const commonConfig = require('./webpack.common.js')
 
 module.exports = webpackMerge(commonConfig, {
   mode: 'production',
@@ -10,19 +9,9 @@ module.exports = webpackMerge(commonConfig, {
   devtool: 'source-map',
 
   optimization: {
+    minimize: true,
     minimizer: [
-      new UglifyJsPlugin({
-        cache: true,
-        parallel: true,
-        sourceMap: true
-      }),
-      new OptimizeCSSAssetsPlugin({
-        cssProcessorOptions: {
-          map: {
-            inline: false
-          }
-        }
-      })
+      new CssMinimizerPlugin()
     ]
   },
 
@@ -31,4 +20,4 @@ module.exports = webpackMerge(commonConfig, {
       'process.env.APP_ENV': JSON.stringify('production')
     })
   ]
-});
+})

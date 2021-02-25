@@ -1,6 +1,6 @@
-const webpackMerge = require('webpack-merge');
-const commonConfig = require('./webpack.common.js');
-const helpers = require('./helpers');
+const webpack = require('webpack')
+const { merge: webpackMerge } = require('webpack-merge')
+const commonConfig = require('./webpack.common.js')
 
 module.exports = webpackMerge(commonConfig, {
   mode: 'development',
@@ -13,5 +13,11 @@ module.exports = webpackMerge(commonConfig, {
     port: 3001,
     historyApiFallback: true,
     stats: 'errors-only'
-  }
-});
+  },
+
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.APP_ENV': JSON.stringify('development')
+    })
+  ]
+})

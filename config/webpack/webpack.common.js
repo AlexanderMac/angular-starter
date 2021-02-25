@@ -1,30 +1,15 @@
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+process.env.NODE_ENV = process.env.NODE_ENV || 'development'
 
-const webpack = require('webpack');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const HtmlPlugin = require('html-webpack-plugin');
-const ProgressBarPlugin = require('progress-bar-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const NotifierPlugin = require('webpack-notifier');
-const helpers = require('./helpers');
+const webpack = require('webpack')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const HtmlPlugin = require('html-webpack-plugin')
+const ProgressBarPlugin = require('progress-bar-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const NotifierPlugin = require('webpack-notifier')
+const helpers = require('./helpers')
 
 module.exports = {
-  stats: {
-    assets: false,
-    builtAt: false,
-    children: false,
-    chunks: true,
-    chunkGroups: false,
-    chunkModules: false,
-    chunkOrigins: false,
-    cachedAssets: false,
-    depth: false,
-    entrypoints: false,
-    timings: false,
-    hash: false,
-    modules: false,
-    version: false
-  },
+  stats: 'errors-only',
 
   performance: {
     hints: false
@@ -48,48 +33,23 @@ module.exports = {
   output: {
     path: helpers.root('public'),
     publicPath: '/',
-    filename: '[name]-[hash].js',
-    chunkFilename: '[name]-[hash].js'
-  },
-
-  optimization: {
-    splitChunks: {
-      chunks: 'async',
-      minSize: 30000,
-      maxSize: 0,
-      minChunks: 1,
-      maxAsyncRequests: 5,
-      maxInitialRequests: 3,
-      automaticNameDelimiter: '~',
-      name: true,
-      cacheGroups: {
-        vendors: {
-          test: /[\\/]node_modules[\\/]/,
-          chunks: 'all',
-          name: 'vendors',
-          priority: -10
-        },
-        default: {
-          minChunks: 2,
-          priority: -20,
-          reuseExistingChunk: true
-        }
-      }
-    }
+    filename: '[name]-[contenthash].js',
+    chunkFilename: '[name]-[contenthash].js',
+    sourceMapFilename: '[file].map[query]'
   },
 
   module: {
     rules: [
       {
-        test: /[\/\\]@angular[\/\\]core[\/\\].+\.js$/,
+        test: /[\\/\\]@angular[\\/\\]core[\\/\\].+\.js$/,
         parser: {
           system: true
         }
       },
       {
         test: /\.ts$/,
-        exclude: /(node_modules)/,
-        use: 'ts-loader'
+        use: 'ts-loader',
+        exclude: /(node_modules)/
       },
       {
         test: /\.json$/,
@@ -97,7 +57,6 @@ module.exports = {
       },
       {
         test: /\.pug$/,
-        exclude: /(node_modules)/,
         use: [
           {
             loader: 'raw-loader',
@@ -106,7 +65,8 @@ module.exports = {
             }
           },
           'pug-html-loader'
-        ]
+        ],
+        exclude: /(node_modules)/
       },
       {
         test: /\.css$/,
@@ -117,12 +77,12 @@ module.exports = {
       },
       {
         test: /\.styl$/,
-        exclude: /(node_modules)/,
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
           'stylus-loader'
-        ]
+        ],
+        exclude: /(node_modules)/
       },
       {
         test: /\.(png|jpe?g|gif)$/,
@@ -136,7 +96,9 @@ module.exports = {
   },
 
   plugins: [
-    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin({
+      cleanAfterEveryBuildPatterns: ['!css/*', '!fonts/*', '!images/*']
+    }),
 
     // To hide `Critical dependency: the request of a dependency is an expression` warning
     new webpack.ContextReplacementPlugin(
@@ -153,8 +115,8 @@ module.exports = {
     }),
 
     new MiniCssExtractPlugin({
-      filename: 'css/[name]-[hash].css',
-      chunkFilename: 'css/[name]-[hash].css'
+      filename: 'css/[name]-[contenthash].css',
+      chunkFilename: 'css/[name]-[contenthash].css'
     }),
 
     new ProgressBarPlugin({
@@ -168,4 +130,4 @@ module.exports = {
       skipFirstNotification: true
     })
   ]
-};
+}
