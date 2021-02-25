@@ -1,19 +1,19 @@
 {
-  "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended"
-  ],
   "env": {
     "browser": true,
-    "amd": true
+    "amd": true,
+    "es2020": true
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 2019,
     "sourceType": "module"
   },
   "plugins": [
     "@typescript-eslint"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
     "@typescript-eslint/adjacent-overload-signatures": "error",
@@ -27,15 +27,20 @@
       },
       {
         "selector": "memberLike",
-        "modifiers": ["private"],
         "format": ["camelCase"],
         "leadingUnderscore": "allow"
-      }, 
+      },
       {
         "selector": "typeLike",
         "format": ["PascalCase"]
+      },
+      {
+        "selector": "function",
+        "format": ["camelCase"],
+        "leadingUnderscore": "allow"
       }
     ],
+    "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/consistent-type-assertions": "error",
     "@typescript-eslint/explicit-function-return-type": "warn",
     "@typescript-eslint/explicit-module-boundary-types": "off",
@@ -56,6 +61,7 @@
     "@typescript-eslint/prefer-namespace-keyword": "error",
     "@typescript-eslint/triple-slash-reference": "error",
     "@typescript-eslint/type-annotation-spacing": "error",
+    "@typescript-eslint/semi": ["warn", "never"],
 
     "array-bracket-spacing": ["error", "never"],
     "block-scoped-var": "error",
@@ -99,7 +105,7 @@
     "prefer-rest-params": "error",
     "prefer-spread": "error",
     "require-await": "warn",
-    "semi": ["error", "always"],
+    "semi": "off",
     "space-infix-ops": "error",
     "space-unary-ops": "error",
     "strict": "error",

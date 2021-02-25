@@ -1,13 +1,12 @@
 {
   "env": {
     "node": true,
-    "es6": true
+    "es2020": true
   },
   "parserOptions": {
-    "ecmaVersion": 2019,
     "sourceType": "module",
     "ecmaFeatures": {
-      "impliedStrict": false
+      "impliedStrict": true
     }
   },
   "extends": "eslint:recommended",
@@ -28,7 +27,7 @@
     "max-depth": ["warn", 3],
     "max-len": ["warn", 130],
     "max-nested-callbacks": ["warn", 3],
-    "max-params": ["warn", 5],
+    "max-params": ["warn", 3],
     "max-statements": ["warn", 15],
     "new-cap": "off",
     "no-console": "error",
@@ -46,7 +45,7 @@
     "no-trailing-spaces": "error",
     "no-throw-literal": "error",
     "no-unused-expressions": "error",
-    "no-unused-vars": "off",
+    "no-unused-vars": "error",
     "no-use-before-define": "off",
     "no-useless-call": "warn",
     "object-curly-spacing": ["error", "always", { "objectsInObjects": false }],
@@ -54,7 +53,7 @@
     "prefer-rest-params": "error",
     "prefer-spread": "error",
     "require-await": "warn",
-    "semi": ["error", "always"],
+    "semi": ["warn", "never"],
     "space-infix-ops": "error",
     "space-unary-ops": "error",
     "strict": "error",
