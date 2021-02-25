@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { SharedModule } from '../_shared/module';
-import { HomeComponent } from './home.component';
-import { NotFoundComponent } from './not-found.component';
+import { NgModule } from '@angular/core'
+import { RouterModule } from '@angular/router'
+import { SharedModule } from '../_shared/module'
+import { HomeComponent } from './home.component'
+import { NotFoundComponent } from './not-found.component'
 
 @NgModule({
   declarations: [

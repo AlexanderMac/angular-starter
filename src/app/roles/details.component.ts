@@ -1,21 +1,21 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { finalize } from 'rxjs/operators';
-import { NotificationService } from '../_core/notification.service';
-import { RoleService } from './service';
-import { Role } from './model';
+import { Component, OnInit, OnDestroy } from '@angular/core'
+import { ActivatedRoute, Router } from '@angular/router'
+import { Subscription } from 'rxjs'
+import { finalize } from 'rxjs/operators'
+import { NotificationService } from '../_core/notification.service'
+import { RoleService } from './service'
+import { Role } from './model'
 
 @Component({
   selector: 'am-role-details',
   template: require('./details.component.pug')
 })
 export class RoleDetailsComponent implements OnInit, OnDestroy {
-  isLoading: boolean;
-  isSaving: boolean;
-  roleId: number;
-  role: Role;
-  subscriptions = new Subscription();
+  isLoading: boolean
+  isSaving: boolean
+  roleId: number
+  role: Role
+  subscriptions = new Subscription()
 
   constructor(
     private router: Router,
@@ -23,19 +23,19 @@ export class RoleDetailsComponent implements OnInit, OnDestroy {
     private ntfsSrvc: NotificationService,
     private roleSrvc: RoleService
   ) {
-    this.roleId = +this.activatedRoute.snapshot.params.id;
+    this.roleId = +this.activatedRoute.snapshot.params.id
   }
 
   ngOnInit(): void {
-    this.loadRole();
+    this.loadRole()
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.unsubscribe();
+    this.subscriptions.unsubscribe()
   }
 
   loadRole(): void {
-    this.isLoading = true;
+    this.isLoading = true
     let subscription = this.roleSrvc
       .getRole(this.roleId)
       .pipe(
@@ -44,10 +44,10 @@ export class RoleDetailsComponent implements OnInit, OnDestroy {
       .subscribe(
         role => this.role = role,
         (err: Error) => {
-          this.ntfsSrvc.warningOrError('Unable to load role', err);
-          this.router.navigate(['/roles']);
+          this.ntfsSrvc.warningOrError('Unable to load role', err)
+          this.router.navigate(['/roles'])
         }
-      );
-    this.subscriptions.add(subscription);
+      )
+    this.subscriptions.add(subscription)
   }
 }

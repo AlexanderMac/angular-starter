@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core'
 
-import './app.styl';
+import './app.styl'
 
 @Component({
   selector: 'am-app',
