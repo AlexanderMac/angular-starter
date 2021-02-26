@@ -11,11 +11,11 @@ import { Role } from './model'
   template: require('./details.component.pug')
 })
 export class RoleDetailsComponent implements OnInit, OnDestroy {
-  isLoading: boolean
-  isSaving: boolean
   roleId: number
   role: Role
-  subscriptions = new Subscription()
+  isLoading: boolean
+  isSaving: boolean
+  private _subscriptions = new Subscription()
 
   constructor(
     private router: Router,
@@ -31,7 +31,7 @@ export class RoleDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.unsubscribe()
+    this._subscriptions.unsubscribe()
   }
 
   loadRole(): void {
@@ -48,6 +48,6 @@ export class RoleDetailsComponent implements OnInit, OnDestroy {
           this.router.navigate(['/roles'])
         }
       )
-    this.subscriptions.add(subscription)
+    this._subscriptions.add(subscription)
   }
 }

@@ -17,11 +17,11 @@ class UserEx extends User {
   template: require('./details.component.pug')
 })
 export class UserDetailsComponent implements OnInit, OnDestroy {
-  isLoading: boolean
-  isSaving: boolean
   userId: number
   user: UserEx
-  subscriptions = new Subscription()
+  isLoading: boolean
+  isSaving: boolean
+  private _subscriptions = new Subscription()
 
   constructor(
     private router: Router,
@@ -38,15 +38,15 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.unsubscribe()
+    this._subscriptions.unsubscribe()
   }
 
   loadUser(): void {
     this.isLoading = true
-    let subscription = forkJoin(
+    let subscription = forkJoin([
       this.roleSrvc.getRoles(),
       this.userSrvc.getUser(this.userId)
-    )
+    ])
       .pipe(
         finalize(() => this.isLoading = false)
       )
@@ -65,6 +65,6 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
           this.router.navigate(['/users'])
         }
       )
-    this.subscriptions.add(subscription)
+    this._subscriptions.add(subscription)
   }
 }

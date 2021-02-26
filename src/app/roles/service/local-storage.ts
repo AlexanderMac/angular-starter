@@ -8,30 +8,30 @@ import { Role } from '../model'
 
 @Injectable()
 export class RoleLocalStrgService {
-  private repoSrvc: LocalStorageRepoService
+  private _repoSrvc: LocalStorageRepoService
 
   constructor(factory: LocalStorageRepoServiceFactory) {
-    this.repoSrvc = factory.getInstance()
-    this.repoSrvc.init('Roles')
+    this._repoSrvc = factory.getInstance()
+    this._repoSrvc.init('Roles')
   }
 
   getRole(id: number): Observable<Role> {
-    return this.repoSrvc.getOne(id)
+    return this._repoSrvc.getOne(id)
   }
 
   getRoles(): Observable<Role[]> {
-    return this.repoSrvc.getList()
+    return this._repoSrvc.getList()
   }
 
   createRole(role: Role): Observable<Role> {
-    return this.repoSrvc.create(role)
+    return this._repoSrvc.create(role)
   }
 
   updateRole(roleData: any): Observable<Role> {
-    return this.repoSrvc.update(roleData)
+    return this._repoSrvc.update(roleData)
   }
 
   deleteRole(id: number): Observable<boolean> {
-    return this.repoSrvc.delete(id)
+    return this._repoSrvc.delete(id)
   }
 }

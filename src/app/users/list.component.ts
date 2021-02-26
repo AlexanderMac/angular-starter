@@ -17,10 +17,10 @@ class UserEx extends User {
   template: require('./list.component.pug')
 })
 export class UserListComponent implements OnInit, OnDestroy {
+  users: UserEx[]
   isLoading: boolean
   isSaving: boolean
-  users: UserEx[]
-  subscriptions = new Subscription()
+  private _subscriptions = new Subscription()
 
   constructor(
     private router: Router,
@@ -34,7 +34,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.unsubscribe()
+    this._subscriptions.unsubscribe()
   }
 
   loadUsers(): void {
@@ -61,7 +61,7 @@ export class UserListComponent implements OnInit, OnDestroy {
         },
         (err: Error) => this.ntfsSrvc.warningOrError('Unable to load users', err)
       )
-    this.subscriptions.add(subscription)
+    this._subscriptions.add(subscription)
   }
 
   userDetails(user: User): void {
@@ -91,6 +91,6 @@ export class UserListComponent implements OnInit, OnDestroy {
         },
         (err: Error) => this.ntfsSrvc.warningOrError('Unable to delete user', err)
       )
-    this.subscriptions.add(subscription)
+    this._subscriptions.add(subscription)
   }
 }

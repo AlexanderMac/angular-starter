@@ -17,12 +17,11 @@ import { Role } from './model'
 })
 export class RoleMultiselectorComponent implements OnInit, OnDestroy {
   roles: Role[]
-  selectedRoles = {}
+  selectedRoles: any
   isNoRoleSelected = true
-  subscriptions = new Subscription()
+  private _subscriptions = new Subscription()
 
   @Input() initialRoles: number[]
-
   @Output() rolesChanged = new EventEmitter()
 
   constructor(private roleSrvc: RoleService) {}
@@ -32,7 +31,7 @@ export class RoleMultiselectorComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.unsubscribe()
+    this._subscriptions.unsubscribe()
   }
 
   private _loadRoles(): void {
@@ -48,7 +47,7 @@ export class RoleMultiselectorComponent implements OnInit, OnDestroy {
           this.isNoRoleSelected = _.isEmpty(this.selectedRoles)
         }
       )
-    this.subscriptions.add(subscription)
+    this._subscriptions.add(subscription)
   }
 
   rolesChange(): void {

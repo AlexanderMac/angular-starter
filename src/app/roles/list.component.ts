@@ -12,10 +12,10 @@ import { Role } from './model'
   template: require('./list.component.pug')
 })
 export class RoleListComponent implements OnInit, OnDestroy {
+  roles: Role[]
   isLoading: boolean
   isSaving: boolean
-  roles: Role[]
-  subscriptions = new Subscription()
+  private _subscriptions = new Subscription()
 
   constructor(
     private router: Router,
@@ -28,7 +28,7 @@ export class RoleListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.unsubscribe()
+    this._subscriptions.unsubscribe()
   }
 
   private _loadRoles(): void {
@@ -42,7 +42,7 @@ export class RoleListComponent implements OnInit, OnDestroy {
         roles => this.roles = roles,
         (err: Error) => this.ntfsSrvc.warningOrError('Unable to load roles', err)
       )
-    this.subscriptions.add(subscription)
+    this._subscriptions.add(subscription)
   }
 
   roleDetails(role: Role): void {
@@ -72,6 +72,6 @@ export class RoleListComponent implements OnInit, OnDestroy {
         },
         (err: Error) => this.ntfsSrvc.warningOrError('Unable to delete role', err)
       )
-    this.subscriptions.add(subscription)
+    this._subscriptions.add(subscription)
   }
 }

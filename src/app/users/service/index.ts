@@ -8,29 +8,29 @@ declare const SRVC_TYPE: string
 
 @Injectable()
 export class UserService {
-  private repoSrvc: any
+  private _repoSrvc: any
 
   constructor(ls: UserLocalStrgService, http: UserHttpService) {
-    this.repoSrvc = SRVC_TYPE === 'local-storage' ? ls : http
+    this._repoSrvc = SRVC_TYPE === 'local-storage' ? ls : http
   }
 
   getUser(id: number): Observable<User> {
-    return this.repoSrvc.getUser(id)
+    return this._repoSrvc.getUser(id)
   }
 
   getUsers(): Observable<User[]> {
-    return this.repoSrvc.getUsers()
+    return this._repoSrvc.getUsers()
   }
 
   createUser(user: User): Observable<User> {
-    return this.repoSrvc.createUser(user)
+    return this._repoSrvc.createUser(user)
   }
 
   updateUser(userData: any): Observable<User> {
-    return this.repoSrvc.updateUser(userData)
+    return this._repoSrvc.updateUser(userData)
   }
 
   deleteUser(id: number): Observable<boolean> {
-    return this.repoSrvc.deleteUser(id)
+    return this._repoSrvc.deleteUser(id)
   }
 }

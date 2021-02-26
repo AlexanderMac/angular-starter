@@ -8,30 +8,30 @@ import { User } from '../model'
 
 @Injectable()
 export class UserLocalStrgService {
-  private repoSrvc: LocalStorageRepoService
+  private _repoSrvc: LocalStorageRepoService
 
   constructor(factory: LocalStorageRepoServiceFactory) {
-    this.repoSrvc = factory.getInstance()
-    this.repoSrvc.init('Users')
+    this._repoSrvc = factory.getInstance()
+    this._repoSrvc.init('Users')
   }
 
   getUser(id: number): Observable<User> {
-    return this.repoSrvc.getOne(id)
+    return this._repoSrvc.getOne(id)
   }
 
   getUsers(): Observable<User[]> {
-    return this.repoSrvc.getList()
+    return this._repoSrvc.getList()
   }
 
   createUser(user: User): Observable<User> {
-    return this.repoSrvc.create(user)
+    return this._repoSrvc.create(user)
   }
 
   updateUser(userData: any): Observable<User> {
-    return this.repoSrvc.update(userData)
+    return this._repoSrvc.update(userData)
   }
 
   deleteUser(id: number): Observable<boolean> {
-    return this.repoSrvc.delete(id)
+    return this._repoSrvc.delete(id)
   }
 }

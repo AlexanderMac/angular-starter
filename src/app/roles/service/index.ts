@@ -8,29 +8,29 @@ declare const SRVC_TYPE: string
 
 @Injectable()
 export class RoleService {
-  private repoSrvc: any
+  private _repoSrvc: any
 
   constructor(ls: RoleLocalStrgService, http: RoleHttpService) {
-    this.repoSrvc = SRVC_TYPE === 'local-storage' ? ls : http
+    this._repoSrvc = SRVC_TYPE === 'local-storage' ? ls : http
   }
 
   getRole(id: number): Observable<Role> {
-    return this.repoSrvc.getRole(id)
+    return this._repoSrvc.getRole(id)
   }
 
   getRoles(): Observable<Role[]> {
-    return this.repoSrvc.getRoles()
+    return this._repoSrvc.getRoles()
   }
 
   createRole(role: Role): Observable<Role> {
-    return this.repoSrvc.createRole(role)
+    return this._repoSrvc.createRole(role)
   }
 
   updateRole(roleData: any): Observable<Role> {
-    return this.repoSrvc.updateRole(roleData)
+    return this._repoSrvc.updateRole(roleData)
   }
 
   deleteRole(id: number): Observable<boolean> {
-    return this.repoSrvc.deleteRole(id)
+    return this._repoSrvc.deleteRole(id)
   }
 }

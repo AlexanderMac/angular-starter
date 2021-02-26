@@ -1,38 +1,38 @@
+import * as _ from 'lodash'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs/Observable'
-import * as _ from 'lodash'
 import { BaseRepoService } from './base-repo.service'
 
 export class LocalStorageRepoService extends BaseRepoService {
-  private localStorage: Storage
-  private collectionName: string
+  private _localStorage: Storage
+  private _collectionName: string
 
   constructor() {
     super()
-    this.localStorage = window.localStorage
+    this._localStorage = window.localStorage
   }
 
   init(collectionName: string): void {
-    this.collectionName = collectionName
+    this._collectionName = collectionName
     this.load()
   }
 
   load(): void {
-    let objsStr = this.localStorage.getItem(this.collectionName)
+    let objsStr = this._localStorage.getItem(this._collectionName)
     if (objsStr) {
       let parseResult = _.attempt(JSON.parse.bind(null, objsStr)) as any[]
-      this.objects = _.isError(parseResult) ? [] : parseResult
-      let nextIdStr = _.chain(this.objects)
+      this._objects = _.isError(parseResult) ? [] : parseResult
+      let nextIdStr = _.chain(this._objects)
         .map('id')
         .max()
         .value()
-      this.nextId = +nextIdStr || 0
+      this._nextId = +nextIdStr || 0
     }
   }
 
   save(): void {
-    let objsStr = JSON.stringify(this.objects)
-    this.localStorage.setItem(this.collectionName, objsStr)
+    let objsStr = JSON.stringify(this._objects)
+    this._localStorage.setItem(this._collectionName, objsStr)
   }
 
   create(obj: any): Observable<any> {

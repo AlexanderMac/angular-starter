@@ -11,11 +11,11 @@ import { Role } from './model'
   template: require('./form.component.pug')
 })
 export class RoleFormComponent implements OnInit, OnDestroy {
-  isLoading: boolean
-  isSaving: boolean
   roleId: number
   role: Role
-  subscriptions = new Subscription()
+  isLoading: boolean
+  isSaving: boolean
+  private _subscriptions = new Subscription()
 
   constructor(
     private router: Router,
@@ -35,7 +35,7 @@ export class RoleFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.unsubscribe()
+    this._subscriptions.unsubscribe()
   }
 
   loadRole(): void {
@@ -52,13 +52,15 @@ export class RoleFormComponent implements OnInit, OnDestroy {
           this.router.navigate(['/roles'])
         }
       )
-    this.subscriptions.add(subscription)
+    this._subscriptions.add(subscription)
   }
 
   saveRole(): void {
     this.isSaving = true
-    let fn = this.roleId ? 'updateRole' : 'createRole'
-    let subscription = this.roleSrvc[fn](this.role)
+    let fn = this.roleId ?
+      this.roleSrvc.updateRole :
+      this.roleSrvc.createRole
+    let subscription = fn(this.role)
       .pipe(
         finalize(() => this.isSaving = false)
       )
@@ -69,6 +71,6 @@ export class RoleFormComponent implements OnInit, OnDestroy {
         },
         (err: Error) => this.ntfsSrvc.warningOrError('Unable to save role', err)
       )
-    this.subscriptions.add(subscription)
+    this._subscriptions.add(subscription)
   }
 }

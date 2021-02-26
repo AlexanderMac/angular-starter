@@ -12,11 +12,11 @@ import { User } from './model'
   template: require('./form.component.pug')
 })
 export class UserFormComponent implements OnInit, OnDestroy {
-  isLoading: boolean
-  isSaving: boolean
   userId: number
   user: User
-  subscriptions = new Subscription()
+  isLoading: boolean
+  isSaving: boolean
+  private _subscriptions = new Subscription()
 
   constructor(
     private router: Router,
@@ -37,7 +37,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.unsubscribe()
+    this._subscriptions.unsubscribe()
   }
 
   loadUser(): void {
@@ -57,13 +57,15 @@ export class UserFormComponent implements OnInit, OnDestroy {
           this.router.navigate(['/users'])
         }
       )
-    this.subscriptions.add(subscription)
+    this._subscriptions.add(subscription)
   }
 
   saveUser(): void {
     this.isSaving = true
-    let fn = this.userId ? 'updateUser' : 'createUser'
-    let subscription = this.userSrvc[fn](this.user)
+    let fn = this.userId ?
+      this.userSrvc.updateUser :
+      this.userSrvc.createUser
+    let subscription = fn(this.user)
       .pipe(
         finalize(() => this.isSaving = false)
       )
@@ -74,7 +76,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
         },
         (err: Error) => this.ntfsSrvc.warningOrError('Unable to save user', err)
       )
-    this.subscriptions.add(subscription)
+    this._subscriptions.add(subscription)
   }
 
   rolesChanged(roles: number[]): void {
