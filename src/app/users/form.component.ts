@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Subscription } from 'rxjs'
 import { finalize } from 'rxjs/operators'
-import * as _ from 'lodash'
 import { NotificationService } from '../_core/notification.service'
 import { UserService } from './service'
 import { User } from './model'
@@ -30,7 +29,6 @@ export class UserFormComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     if (!this.userId) {
       this.user = new User()
-      this.user.roles = []
     } else {
       this.loadUser()
     }
@@ -48,10 +46,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
         finalize(() => this.isLoading = false)
       )
       .subscribe(
-        user => {
-          user.roles = _.map(user.roles, r => +r)
-          this.user = user
-        },
+        (user: User) => this.user = user,
         (err: Error) => {
           this.ntfsSrvc.warningOrError('Unable to load user', err)
           this.router.navigate(['/users'])
@@ -65,7 +60,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
     let fn = this.userId ?
       this.userSrvc.updateUser :
       this.userSrvc.createUser
-    let subscription = fn(this.user)
+    let subscription = fn.call(this.userSrvc, this.user)
       .pipe(
         finalize(() => this.isSaving = false)
       )
@@ -77,9 +72,5 @@ export class UserFormComponent implements OnInit, OnDestroy {
         (err: Error) => this.ntfsSrvc.warningOrError('Unable to save user', err)
       )
     this._subscriptions.add(subscription)
-  }
-
-  rolesChanged(roles: number[]): void {
-    this.user.roles = roles
   }
 }

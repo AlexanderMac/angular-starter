@@ -1,23 +1,18 @@
 import * as _ from 'lodash'
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Router } from '@angular/router'
-import { Subscription, forkJoin } from 'rxjs'
+import { Subscription } from 'rxjs'
 import { finalize } from 'rxjs/operators'
 import { NotificationService } from '../_core/notification.service'
 import { UserService } from './service'
-import { RoleService } from '../roles/service'
 import { User } from './model'
-
-class UserEx extends User {
-  rolesStr: string
-}
 
 @Component({
   selector: 'am-user-list',
   template: require('./list.component.pug')
 })
 export class UserListComponent implements OnInit, OnDestroy {
-  users: UserEx[]
+  users: User[]
   isLoading: boolean
   isSaving: boolean
   private _subscriptions = new Subscription()
@@ -25,8 +20,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private ntfsSrvc: NotificationService,
-    private userSrvc: UserService,
-    private roleSrvc: RoleService) {
+    private userSrvc: UserService) {
   }
 
   ngOnInit(): void {
@@ -39,26 +33,13 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   loadUsers(): void {
     this.isLoading = true
-    let subscription = forkJoin(
-      this.roleSrvc.getRoles(),
-      this.userSrvc.getUsers()
-    )
+    let subscription = this.userSrvc
+      .getUsers()
       .pipe(
         finalize(() => this.isLoading = false)
       )
       .subscribe(
-        ([roles, users]) => {
-          this.users = _.map(users, user => {
-            let userEx = user as UserEx
-            userEx.rolesStr = _.chain(user.roles)
-              .map(userRoleId => _.find(roles, { id: +userRoleId }))
-              .map(role => role ? role.name : '')
-              .compact()
-              .join(',')
-              .value()
-            return userEx
-          })
-        },
+        (users: User[]) => this.users = users,
         (err: Error) => this.ntfsSrvc.warningOrError('Unable to load users', err)
       )
     this._subscriptions.add(subscription)

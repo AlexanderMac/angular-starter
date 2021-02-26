@@ -1,16 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
-import { Subscription, forkJoin } from 'rxjs'
+import { Subscription } from 'rxjs'
 import { finalize } from 'rxjs/operators'
-import * as _ from 'lodash'
 import { NotificationService } from '../_core/notification.service'
 import { UserService } from './service'
-import { RoleService } from '../roles/service'
 import { User } from './model'
-
-class UserEx extends User {
-  rolesStr: string
-}
 
 @Component({
   selector: 'am-user-details',
@@ -18,7 +12,7 @@ class UserEx extends User {
 })
 export class UserDetailsComponent implements OnInit, OnDestroy {
   userId: number
-  user: UserEx
+  user: User
   isLoading: boolean
   isSaving: boolean
   private _subscriptions = new Subscription()
@@ -27,8 +21,7 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private ntfsSrvc: NotificationService,
-    private userSrvc: UserService,
-    private roleSrvc: RoleService
+    private userSrvc: UserService
   ) {
     this.userId = +this.activatedRoute.snapshot.params.id
   }
@@ -43,23 +36,13 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
 
   loadUser(): void {
     this.isLoading = true
-    let subscription = forkJoin([
-      this.roleSrvc.getRoles(),
-      this.userSrvc.getUser(this.userId)
-    ])
+    let subscription = this.userSrvc
+      .getUser(this.userId)
       .pipe(
         finalize(() => this.isLoading = false)
       )
       .subscribe(
-        ([roles, user]) => {
-          this.user = user as UserEx
-          this.user.rolesStr = _.chain(user.roles)
-            .map(userRoleId => _.find(roles, { id: +userRoleId }))
-            .map(role => role ? role.name : '')
-            .compact()
-            .join(',')
-            .value()
-        },
+        (user: User) => this.user = user,
         (err: Error) => {
           this.ntfsSrvc.warningOrError('Unable to load user', err)
           this.router.navigate(['/users'])

@@ -40,13 +40,9 @@ am-spinner(*ngIf="isLoading")
         )
         .invalid-feedback Email is required
 
-    .form-group.form-check.row
-      .offset-md-3.col-md-9
-        am-role-multiselector('[initialRoles]'="user.roles" '(rolesChanged)'="rolesChanged($event)")
-
     .buttons.text-right
       a.btn.btn-light(routerLink="/users") Cancel
       button.btn.btn-primary(
         type="submit"
-        '[disabled]'="!userForm.form.valid || user.roles.length === 0 || isSaving"
+        '[disabled]'="!userForm.form.valid || isSaving"
       ) Save

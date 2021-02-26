@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser'
 import { AppComponent } from './app.component'
 import { HomeModule } from './home/module'
 import { UsersModule } from './users/module'
-import { RolesModule } from './roles/module'
 
 @NgModule({
   declarations: [
@@ -17,8 +16,7 @@ import { RolesModule } from './roles/module'
       { path: '**', redirectTo: '/404' }
     ]),
     HomeModule,
-    UsersModule,
-    RolesModule
+    UsersModule
   ],
   providers: [
     { provide: Window, useValue: window }

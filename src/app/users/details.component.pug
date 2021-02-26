@@ -6,9 +6,6 @@ am-spinner(*ngIf="isLoading")
   p
     strong Email:
     a(href="mailto:{{ user.email }}") {{ user.email }}
-  p
-    strong Roles:
-    span {{ user.rolesStr }}
 
   .buttons.text-right
     a.btn.btn-light(routerLink="/users") Cancel

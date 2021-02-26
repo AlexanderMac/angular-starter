@@ -11,14 +11,12 @@ am-spinner(*ngIf="isLoading")
           th.id(scope="col") #
           th(scope="col") Name
           th(scope="col") Email
-          th(scope="col") Roles
           th.actions(scope="col")
       tbody
         tr(*ngFor="let user of users")
           td {{ user.id }}
           td {{ user.name }}
           td {{ user.email }}
-          td {{ user.rolesStr }}
           td.actions
             button.btn.btn-info.btn-sm(
               type="button"
@@ -39,4 +37,4 @@ am-spinner(*ngIf="isLoading")
               '[disabled]'="isSaving"
             ) Delete
         tr(*ngIf="users.length === 0")
-          td.text-center(colspan="5") No users
+          td.text-center(colspan="4") No users

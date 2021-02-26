@@ -4,7 +4,7 @@ Boilerplate for creating Angular project.
 [![Build Status](https://github.com/AlexanderMac/angular-starter/workflows/CI/badge.svg)](https://github.com/AlexanderMac/angular-starter/actions?query=workflow%3ACI)
 
 ### Features
-- Users/Roles CRUD
+- Users CRUD
 - Using LocalStorage or HttpClient as a source data
 - Clean code:)
 
