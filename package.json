@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "angular-starter",
   "private": true,
+  "engines": {
+    "node": ">=14",
+    "npm": ">=7"
+  },
   "scripts": {
     "build": "webpack --config ./config/webpack/webpack.development",
     "build:production": "webpack --config ./config/webpack/webpack.production",
