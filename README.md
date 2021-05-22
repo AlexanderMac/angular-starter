@@ -40,8 +40,8 @@ npm start
 # Open localhost:3001 in the browser
 ```
 
+### License
+[MIT License](LICENSE)
+
 ### Author
 Alexander Mac
-
-### License
-[MIT License](license)
