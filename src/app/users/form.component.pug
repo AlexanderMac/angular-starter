@@ -2,13 +2,15 @@ am-navbar
 
 am-spinner(*ngIf="isLoading")
 .container(*ngIf="!isLoading && user")
-  h2
-    span(*ngIf="userId") Edit User
-    span(*ngIf="!userId") Create User
-    hr
+  .row
+    .col
+      h2
+        span(*ngIf="userId") Edit User
+        span(*ngIf="!userId") Create User
+        hr
 
   form(#userForm="ngForm" '(ngSubmit)'="saveUser()")
-    .form-group.row
+    .row
       label.col-md-3.col-form-label(for="name") Name*
       .col-md-9
         input.form-control(
@@ -24,7 +26,7 @@ am-spinner(*ngIf="isLoading")
         )
         .invalid-feedback Name is required
 
-    .form-group.row
+    .row
       label.col-md-3.col-form-label(for="email") Email*
       .col-md-9
         input.form-control(
@@ -40,9 +42,10 @@ am-spinner(*ngIf="isLoading")
         )
         .invalid-feedback Email is required
 
-    .buttons.text-right
-      a.btn.btn-light(routerLink="/users") Cancel
-      button.btn.btn-primary(
-        type="submit"
-        '[disabled]'="!userForm.form.valid || isSaving"
-      ) Save
+    .row.buttons.text-end
+      .col
+        a.btn.btn-light(routerLink="/users") Cancel
+        button.btn.btn-primary(
+          type="submit"
+          '[disabled]'="!userForm.form.valid || isSaving"
+        ) Save

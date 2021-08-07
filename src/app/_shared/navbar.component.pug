@@ -1,19 +1,20 @@
 nav.navbar.navbar-expand-sm.navbar-dark.bg-dark
-  a.navbar-brand(routerLink="/") Angular starter
-  button.navbar-toggler(
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  )
-    span.navbar-toggler-icon
-  .collapse.navbar-collapse(id="navbarSupportedContent")
-    ul.navbar-nav.mr-auto
-      li.nav-item(routerLinkActive="active")
-        a.nav-link(routerLink="/home") Home
-          span.sr-only (current)
-      li.nav-item(routerLinkActive="active")
-        a.nav-link(routerLink="/users") Users
-    span.navbar-text Hello Guest
+  .container-fluid
+    a.navbar-brand(routerLink="/") Angular starter
+    button.navbar-toggler(
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    )
+      span.navbar-toggler-icon
+    .collapse.navbar-collapse(id="navbarSupportedContent")
+      ul.navbar-nav.me-auto.mb-2.mb-lg-0
+        li.nav-item(routerLinkActive="active")
+          a.nav-link(routerLink="/home") Home
+            span.sr-only
+        li.nav-item(routerLinkActive="active")
+          a.nav-link(routerLink="/users") Users
+      span.navbar-text Hello Guest
