@@ -9,11 +9,11 @@ Boilerplate for creating Angular project.
 - Clean code:)
 
 ### Set
-- **Framework**: Angular v11
+- **Framework**: Angular v12
 - **Language**: TypeScript v4
 - **Build tool**: Webpack v5
 - **CSS preprocessor**: stylus
-- **CSS framework**: boostrap v4
+- **CSS framework**: boostrap v5
 - **Template engine**: pug
 - **Linters**: eslint, pug-lint
 
