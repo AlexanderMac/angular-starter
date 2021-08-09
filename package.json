@@ -26,7 +26,7 @@
     "bootstrap": "^5.0.1",
     "core-js": "^3.6.5",
     "lodash": "^4.17.15",
-    "rxjs": "^6.5.5",
+    "rxjs": "^7.3.0",
     "rxjs-compat": "^6.5.5",
     "toastr": "^2.1.4",
     "webpack-cli": "^4.5.0",

@@ -41,13 +41,13 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
       .pipe(
         finalize(() => this.isLoading = false)
       )
-      .subscribe(
-        (user: User) => this.user = user,
-        (err: Error) => {
+      .subscribe({
+        next: (user: User) => this.user = user,
+        error: (err: Error) => {
           this.ntfsSrvc.warningOrError('Unable to load user', err)
           this.router.navigate(['/users'])
         }
-      )
+      })
     this._subscriptions.add(subscription)
   }
 }

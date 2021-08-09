@@ -1,6 +1,6 @@
 import * as _ from 'lodash'
 import { Injectable } from '@angular/core'
-import { Observable } from 'rxjs/Observable'
+import { Observable } from 'rxjs'
 import { BaseRepoService } from './base-repo.service'
 
 export class LocalStorageRepoService extends BaseRepoService {

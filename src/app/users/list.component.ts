@@ -38,10 +38,10 @@ export class UserListComponent implements OnInit, OnDestroy {
       .pipe(
         finalize(() => this.isLoading = false)
       )
-      .subscribe(
-        (users: User[]) => this.users = users,
-        (err: Error) => this.ntfsSrvc.warningOrError('Unable to load users', err)
-      )
+      .subscribe({
+        next: (users: User[]) => this.users = users,
+        error: (err: Error) => this.ntfsSrvc.warningOrError('Unable to load users', err)
+      })
     this._subscriptions.add(subscription)
   }
 
