@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router'
 import { FormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http'
 
-import { CoreModule } from '../_core/module'
+import { CoreModule } from '@core/module'
 import { NavbarComponent } from './navbar.component'
 import { SpinnerComponent } from './spinner.component'
 

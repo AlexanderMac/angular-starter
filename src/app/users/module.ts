@@ -1,14 +1,12 @@
 import { NgModule } from '@angular/core'
 import { RouterModule } from '@angular/router'
-import { SharedModule } from '../_shared/module'
+import { SharedModule } from '@shared/module'
 import { UserListComponent } from './list.component'
 import { UserFormComponent } from './form.component'
 import { UserDetailsComponent } from './details.component'
 import { UserService } from './service'
 import { UserLocalStrgService } from './service/local-storage'
 import { UserHttpService } from './service/http'
-
-import './styles.styl'
 
 @NgModule({
   declarations: [

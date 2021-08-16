@@ -1,7 +1,7 @@
-am-navbar
+app-navbar
 
-am-spinner(*ngIf="isLoading")
-.container(*ngIf="!isLoading && user")
+app-spinner(*ngIf="isLoading")
+.container.user-form(*ngIf="!isLoading && user")
   .row
     .col
       h2
@@ -10,42 +10,33 @@ am-spinner(*ngIf="isLoading")
         hr
 
   form(#userForm="ngForm" '(ngSubmit)'="saveUser()")
-    .row
-      label.col-md-3.col-form-label(for="name") Name*
-      .col-md-9
-        input.form-control(
-          id="name"
-          name="name"
-          type="text"
-          placeholder="Name"
-          required="true"
-          #name="ngModel"
-          '[(ngModel)]'="user.name"
-          '[disabled]'="isSaving"
-          '[ngClass]'="{ 'is-invalid': name.invalid && (name.dirty || name.touched)}"
-        )
-        .invalid-feedback Name is required
-
-    .row
-      label.col-md-3.col-form-label(for="email") Email*
-      .col-md-9
-        input.form-control(
-          id="email"
-          name="email"
-          type="email"
-          placeholder="Email"
-          required="true"
-          #email="ngModel"
-          '[(ngModel)]'="user.email"
-          '[disabled]'="isSaving"
-          '[ngClass]'="{ 'is-invalid': email.invalid && (email.dirty || email.touched)}"
-        )
-        .invalid-feedback Email is required
-
-    .row.buttons.text-end
-      .col
-        a.btn.btn-light(routerLink="/users") Cancel
-        button.btn.btn-primary(
-          type="submit"
-          '[disabled]'="!userForm.form.valid || isSaving"
-        ) Save
+    .mb-3
+      label.form-label(for="userName") Name*
+      input.form-control(
+        id="userName"
+        type="text"
+        placeholder="User name"
+        required="true"
+        #userName="ngModel"
+        '[(ngModel)]'="user.name"
+        '[disabled]'="isSaving"
+        '[ngClass]'="{ 'is-invalid': userName.invalid && (userName.dirty || userName.touched)}"
+      )
+    .mb-3
+      label.form-label(for="userEmail") Email*
+      input.form-control(
+        id="userEmail"
+        type="email"
+        placeholder="User email"
+        required="true"
+        #userEmail="ngModel"
+        '[(ngModel)]'="user.email"
+        '[disabled]'="isSaving"
+        '[ngClass]'="{ 'is-invalid': userEmail.invalid && (userEmail.dirty || userEmail.touched)}"
+      )
+    .buttons
+      a.btn.btn-light(routerLink="/users") Cancel
+      button.btn.btn-primary(
+        type="submit"
+        '[disabled]'="!userForm.form.valid || isSaving"
+      ) Save

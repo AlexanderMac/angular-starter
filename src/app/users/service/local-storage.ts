@@ -3,7 +3,7 @@ import { Observable } from 'rxjs'
 import {
   LocalStorageRepoService,
   LocalStorageRepoServiceFactory
-} from '../../_core/localstorage-repo.service'
+} from '@core/localstorage-repo.service'
 import { User } from '../model'
 
 @Injectable()

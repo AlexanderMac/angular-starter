@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 
 @Component({
-  selector: 'am-navbar',
-  template: require('./navbar.component.pug')
+  selector: 'app-navbar',
+  templateUrl: './navbar.component.pug'
 })
 export class NavbarComponent { }

@@ -1,4 +1,4 @@
-import * as _ from 'lodash'
+import { cloneDeep, extend, find, chain, remove } from 'lodash'
 import { Observable, of } from 'rxjs'
 
 interface IObject {
@@ -14,8 +14,8 @@ export class BaseRepoService {
     this._nextId = 0
   }
 
-  getOne(id: any): Observable<any> {
-    let obj = _.chain(this._objects)
+  getOne( id: any): Observable<any> {
+    let obj = chain(this._objects)
       .find({ id: parseInt(id) })
       .cloneDeep()
       .value()
@@ -23,23 +23,23 @@ export class BaseRepoService {
   }
 
   getList(): Observable<any[]> {
-    return of(_.cloneDeep(this._objects))
+    return of(cloneDeep(this._objects))
   }
 
   create(obj: any): Observable<any> {
     obj.id = ++this._nextId
-    this._objects.push(_.cloneDeep(obj))
+    this._objects.push(cloneDeep(obj))
     return of(obj)
   }
 
   update(objData: any): Observable<any> {
-    let obj = _.find(this._objects, { id: parseInt(objData.id) })
-    _.extend(obj, objData)
-    return of(_.cloneDeep(obj))
+    let obj = find(this._objects, { id: parseInt(objData.id) })
+    extend(obj, objData)
+    return of(cloneDeep(obj))
   }
 
   delete(id: any): Observable<boolean> {
-    let result = _.remove(this._objects, obj => obj.id === parseInt(id))
+    let result = remove(this._objects, obj => obj.id === parseInt(id))
     return of(!!result)
   }
 }

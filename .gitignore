@@ -1,31 +1,61 @@
-# Logs & temp
-logs
-*.log
-tmp
-.tmp
-.DS_STORE
+# See http://help.github.com/ignore-files/ for more about ignoring files.
 
-# Runtime data
-pids
-*.pid
-*.seed
+# Compiled output
+/dist
+/tmp
+/out-tsc
+# Only exists if Bazel was run
+/bazel-out
 
-# Coverage directory used by tools like istanbul
-coverage
+# Dependencies
+/node_modules
 
-# Compiled
-build/Release
-dist
-public
+# Cordova
+/www
+/plugins
+/platforms
 
-# Dependency directory
-node_modules
+# Electron
+/dist-electron
+/dist-packages
+/electron.main.js
 
-# Users Environment Variables
-.lock-wscript
-.vscode
-.idea
-.brackets.json
-.jsbeautifyrc
-tsd.json
-typings
+# IDEs and editors
+.idea/*
+!.idea/runConfigurations/
+!.idea/codeStyleSettings.xml
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+xcuserdata/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Maven
+/target
+/log
+
+# Misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+/reports
+/src/translations/template.*
+/src/environments/.env.*
+
+# System Files
+.DS_Store
+Thumbs.db

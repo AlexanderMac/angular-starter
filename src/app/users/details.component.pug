@@ -1,6 +1,6 @@
-am-navbar
+app-navbar
 
-am-spinner(*ngIf="isLoading")
+app-spinner(*ngIf="isLoading")
 .container.user-details(*ngIf="!isLoading && user")
   .row
     .col
@@ -8,7 +8,6 @@ am-spinner(*ngIf="isLoading")
       p
         strong Email:
         a(href="mailto:{{ user.email }}") {{ user.email }}
-
-      .buttons.text-right
+      .buttons
         a.btn.btn-light(routerLink="/users") Cancel
         a.btn.btn-primary(routerLink="/users/{{ user.id }}/edit") Edit

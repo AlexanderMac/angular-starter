@@ -1,20 +1,21 @@
-import * as _ from 'lodash'
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Router } from '@angular/router'
+import { remove } from 'lodash'
 import { Subscription } from 'rxjs'
 import { finalize } from 'rxjs/operators'
-import { NotificationService } from '../_core/notification.service'
+import { NotificationService } from '@core/notification.service'
 import { UserService } from './service'
 import { User } from './model'
 
 @Component({
-  selector: 'am-user-list',
-  template: require('./list.component.pug')
+  selector: 'app-user-list',
+  templateUrl: './list.component.pug',
+  styleUrls: ['./list.component.styl']
 })
 export class UserListComponent implements OnInit, OnDestroy {
-  users: User[]
-  isLoading: boolean
-  isSaving: boolean
+  users!: User[]
+  isLoading = false
+  isSaving = false
   private _subscriptions = new Subscription()
 
   constructor(
@@ -67,7 +68,7 @@ export class UserListComponent implements OnInit, OnDestroy {
       )
       .subscribe(
         () => {
-          _.remove(this.users, user)
+          remove(this.users, user)
           this.ntfsSrvc.info('User deleted successfully')
         },
         (err: Error) => this.ntfsSrvc.warningOrError('Unable to delete user', err)

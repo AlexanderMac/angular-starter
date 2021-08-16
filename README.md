@@ -11,11 +11,11 @@ Boilerplate for creating Angular project.
 ### Set
 - **Framework**: Angular v12
 - **Language**: TypeScript v4
-- **Build tool**: Webpack v5
+- **Build tool**: @angular-builders/custom-webpack
 - **CSS preprocessor**: stylus
 - **CSS framework**: boostrap v5
 - **Template engine**: pug
-- **Linters**: eslint, pug-lint
+- **Linters**: eslint
 
 ### How to use
 ```sh
@@ -32,12 +32,11 @@ npm i
 npm test
 
 # Build app:
-npm run build            # for dev
-npm run build:production # for production
+npm run build      # for dev
+npm run build:prod # for production
 
-# Start app and watch for changes:
+# Start app and watch for changes (dev server started on port 3000):
 npm start
-# Open localhost:3001 in the browser
 ```
 
 ### License

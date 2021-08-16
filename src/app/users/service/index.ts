@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
+import { environment } from '@env/environment'
 import { UserLocalStrgService } from './local-storage'
 import { UserHttpService } from './http'
 import { User } from '../model'
-
-declare const SRVC_TYPE: string
 
 @Injectable()
 export class UserService {
   private _repoSrvc: any
 
   constructor(ls: UserLocalStrgService, http: UserHttpService) {
-    this._repoSrvc = SRVC_TYPE === 'local-storage' ? ls : http
+    this._repoSrvc = environment.sourceType === 'local-storage' ? ls : http
   }
 
   getUser(id: number): Observable<User> {

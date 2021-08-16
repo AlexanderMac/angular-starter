@@ -1,11 +1,11 @@
-import * as _ from 'lodash'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
+import { attempt, isError, chain } from 'lodash'
 import { BaseRepoService } from './base-repo.service'
 
 export class LocalStorageRepoService extends BaseRepoService {
   private _localStorage: Storage
-  private _collectionName: string
+  private _collectionName!: string
 
   constructor() {
     super()
@@ -20,9 +20,9 @@ export class LocalStorageRepoService extends BaseRepoService {
   load(): void {
     let objsStr = this._localStorage.getItem(this._collectionName)
     if (objsStr) {
-      let parseResult = _.attempt(JSON.parse.bind(null, objsStr)) as any[]
-      this._objects = _.isError(parseResult) ? [] : parseResult
-      let nextIdStr = _.chain(this._objects)
+      let parseResult = attempt(JSON.parse.bind(null, objsStr)) as any[]
+      this._objects = isError(parseResult) ? [] : parseResult
+      let nextIdStr = chain(this._objects)
         .map('id')
         .max()
         .value()

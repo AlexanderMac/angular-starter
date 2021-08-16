@@ -2,19 +2,20 @@ import { Component, OnInit, OnDestroy } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Subscription } from 'rxjs'
 import { finalize } from 'rxjs/operators'
-import { NotificationService } from '../_core/notification.service'
+import { NotificationService } from '@core/notification.service'
 import { UserService } from './service'
 import { User } from './model'
 
 @Component({
-  selector: 'am-user-form',
-  template: require('./form.component.pug')
+  selector: 'app-user-form',
+  templateUrl: './form.component.pug',
+  styleUrls: ['./form.component.styl']
 })
 export class UserFormComponent implements OnInit, OnDestroy {
   userId: number
-  user: User
-  isLoading: boolean
-  isSaving: boolean
+  user: User | undefined
+  isLoading = false
+  isSaving = false
   private _subscriptions = new Subscription()
 
   constructor(

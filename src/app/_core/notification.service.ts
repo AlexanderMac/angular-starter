@@ -24,7 +24,7 @@ export class NotificationService {
       let errMsg = this._getErrorMessage(err)
       Toastr.warning(errMsg, title, WARNING_OPTS)
     } else {
-      Toastr.warning(title, null, WARNING_OPTS)
+      Toastr.warning(title, undefined, WARNING_OPTS)
     }
   }
 
@@ -33,7 +33,7 @@ export class NotificationService {
       let errMsg = this._getErrorMessage(err)
       Toastr.error(errMsg, title, ERROR_OPTS)
     } else {
-      Toastr.error(title, null, ERROR_OPTS)
+      Toastr.error(title, undefined, ERROR_OPTS)
     }
   }
 

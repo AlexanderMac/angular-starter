@@ -1,11 +1,11 @@
-am-navbar
+app-navbar
 
-am-spinner(*ngIf="isLoading")
+app-spinner(*ngIf="isLoading")
 .container.user-list(*ngIf="!isLoading")
   h2 Users
   a.btn.btn-primary(routerLink="/users/new") New User
   .table-responsive
-    table.table.table-striped.users
+    table.table.table-striped
       thead
         tr
           th.id(scope="col") #
@@ -14,7 +14,7 @@ am-spinner(*ngIf="isLoading")
           th.actions(scope="col")
       tbody
         tr(*ngFor="let user of users")
-          td {{ user.id }}
+          th(scope="row") {{ user.id }}
           td {{ user.name }}
           td {{ user.email }}
           td.actions
