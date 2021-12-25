@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser'
 import { AppComponent } from './app.component'
 import { HomeModule } from './home/module'
 import { UsersModule } from './users/module'
+import { AboutModule } from './about/module'
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,6 +16,7 @@ import { UsersModule } from './users/module'
     ]),
     HomeModule,
     UsersModule,
+    AboutModule,
   ],
   providers: [{ provide: Window, useValue: window }],
   bootstrap: [AppComponent],
