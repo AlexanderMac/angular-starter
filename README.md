@@ -15,7 +15,7 @@ Boilerplate for creating Angular project.
 - **CSS preprocessor**: SASS
 - **CSS framework**: Boostrap v5
 - **Template engine**: Pug
-- **Tools**: ESLint
+- **Tools**: ESLint, Prettier
 
 ### How to use
 ```sh
