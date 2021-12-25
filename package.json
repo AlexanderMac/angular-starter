@@ -12,6 +12,7 @@
     "build": "ng build --configuration development",
     "build:prod": "ng build",
     "start": "ng serve",
+    "prettify": "prettier './src/**/*.ts' --write",
     "lint": "ng lint",
     "generate": "ng generate"
   },
@@ -46,6 +47,7 @@
     "@typescript-eslint/eslint-plugin": "^5.8.0",
     "@typescript-eslint/parser": "^5.8.0",
     "eslint": "^8.5.0",
+    "prettier": "^2.5.1",
     "pug-html-loader": "^1.1.5",
     "raw-loader": "^4.0.2",
     "typescript": "^4.5.4"
