@@ -5,11 +5,6 @@ import { AboutMainComponent } from './main.component'
 
 @NgModule({
   declarations: [AboutMainComponent],
-  imports: [
-    SharedModule,
-    RouterModule.forChild([
-      { path: 'about', component: AboutMainComponent },
-    ]),
-  ],
+  imports: [SharedModule, RouterModule.forChild([{ path: 'about', component: AboutMainComponent }])],
 })
 export class AboutModule {}
