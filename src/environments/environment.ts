@@ -9,7 +9,7 @@
 // Note that as usual, any environment variables you expose through it will end up in your
 // bundle, and you should not use it for any sensitive information like passwords or keys.
 
-import { env } from './.env'
+import { env } from '@env/.env'
 
 export const environment = {
   production: false,
