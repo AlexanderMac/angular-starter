@@ -28,7 +28,7 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "inlineStyleLanguage": "css",
+            "inlineStyleLanguage": "sass",
             "assets": [
               "src/favicon.ico",
               "src/apple-touch-icon.png",
@@ -37,7 +37,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/main.styl"
+              "src/main.sass"
             ],
             "scripts": []
           },

@@ -10,7 +10,7 @@ import { User } from './model'
 @Component({
   selector: 'app-user-list',
   templateUrl: './list.component.pug',
-  styleUrls: ['./list.component.styl']
+  styleUrls: ['./list.component.sass']
 })
 export class UserListComponent implements OnInit, OnDestroy {
   users!: User[]

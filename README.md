@@ -12,7 +12,7 @@ Boilerplate for creating Angular project.
 - **Framework**: Angular v13
 - **Language**: TypeScript v4
 - **Build tool**: @angular-builders/custom-webpack
-- **CSS preprocessor**: Stylus
+- **CSS preprocessor**: SASS
 - **CSS framework**: Boostrap v5
 - **Template engine**: Pug
 - **Tools**: ESLint

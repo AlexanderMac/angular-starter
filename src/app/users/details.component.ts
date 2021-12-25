@@ -9,7 +9,7 @@ import { User } from './model'
 @Component({
   selector: 'app-user-details',
   templateUrl: './details.component.pug',
-  styleUrls: ['./details.component.styl']
+  styleUrls: ['./details.component.sass']
 })
 export class UserDetailsComponent implements OnInit, OnDestroy {
   userId: number
