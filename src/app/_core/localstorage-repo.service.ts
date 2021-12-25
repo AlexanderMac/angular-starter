@@ -22,10 +22,7 @@ export class LocalStorageRepoService extends BaseRepoService {
     if (objsStr) {
       let parseResult = attempt(JSON.parse.bind(null, objsStr)) as any[]
       this._objects = isError(parseResult) ? [] : parseResult
-      let nextIdStr = chain(this._objects)
-        .map('id')
-        .max()
-        .value()
+      let nextIdStr = chain(this._objects).map('id').max().value()
       this._nextId = +nextIdStr || 0
     }
   }

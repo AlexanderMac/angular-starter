@@ -2,7 +2,7 @@ import { cloneDeep, extend, find, chain, remove } from 'lodash'
 import { Observable, of } from 'rxjs'
 
 interface IObject {
-  id: any;
+  id: any
 }
 
 export class BaseRepoService {
@@ -14,7 +14,7 @@ export class BaseRepoService {
     this._nextId = 0
   }
 
-  getOne( id: any): Observable<any> {
+  getOne(id: any): Observable<any> {
     let obj = chain(this._objects)
       .find({ id: parseInt(id) })
       .cloneDeep()

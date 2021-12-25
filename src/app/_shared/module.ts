@@ -9,24 +9,8 @@ import { NavbarComponent } from './navbar.component'
 import { SpinnerComponent } from './spinner.component'
 
 @NgModule({
-  declarations: [
-    NavbarComponent,
-    SpinnerComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    FormsModule,
-    CoreModule
-  ],
-  exports: [
-    CommonModule,
-    RouterModule,
-    FormsModule,
-    HttpClientModule,
-    CoreModule,
-    NavbarComponent,
-    SpinnerComponent
-  ]
+  declarations: [NavbarComponent, SpinnerComponent],
+  imports: [CommonModule, RouterModule, FormsModule, CoreModule],
+  exports: [CommonModule, RouterModule, FormsModule, HttpClientModule, CoreModule, NavbarComponent, SpinnerComponent],
 })
-export class SharedModule { }
+export class SharedModule {}

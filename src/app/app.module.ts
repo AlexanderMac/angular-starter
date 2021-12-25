@@ -6,21 +6,17 @@ import { HomeModule } from './home/module'
 import { UsersModule } from './users/module'
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     RouterModule.forRoot([
       { path: '', redirectTo: '/home', pathMatch: 'full' },
-      { path: '**', redirectTo: '/404' }
+      { path: '**', redirectTo: '/404' },
     ]),
     HomeModule,
-    UsersModule
+    UsersModule,
   ],
-  providers: [
-    { provide: Window, useValue: window }
-  ],
-  bootstrap: [AppComponent]
+  providers: [{ provide: Window, useValue: window }],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

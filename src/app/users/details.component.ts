@@ -9,7 +9,7 @@ import { User } from './model'
 @Component({
   selector: 'app-user-details',
   templateUrl: './details.component.pug',
-  styleUrls: ['./details.component.sass']
+  styleUrls: ['./details.component.sass'],
 })
 export class UserDetailsComponent implements OnInit, OnDestroy {
   userId: number
@@ -22,7 +22,7 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private ntfsSrvc: NotificationService,
-    private userSrvc: UserService
+    private userSrvc: UserService,
   ) {
     this.userId = +this.activatedRoute.snapshot.params.id
   }
@@ -39,15 +39,13 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
     this.isLoading = true
     let subscription = this.userSrvc
       .getUser(this.userId)
-      .pipe(
-        finalize(() => this.isLoading = false)
-      )
+      .pipe(finalize(() => (this.isLoading = false)))
       .subscribe({
-        next: (user: User) => this.user = user,
+        next: (user: User) => (this.user = user),
         error: (err: Error) => {
           this.ntfsSrvc.warningOrError('Unable to load user', err)
           this.router.navigate(['/users'])
-        }
+        },
       })
     this._subscriptions.add(subscription)
   }

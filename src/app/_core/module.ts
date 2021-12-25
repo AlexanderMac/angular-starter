@@ -4,10 +4,6 @@ import { LocalStorageRepoServiceFactory } from './localstorage-repo.service'
 import { NotificationService } from './notification.service'
 
 @NgModule({
-  providers: [
-    MemoryRepoServiceFactory,
-    LocalStorageRepoServiceFactory,
-    NotificationService
-  ]
+  providers: [MemoryRepoServiceFactory, LocalStorageRepoServiceFactory, NotificationService],
 })
-export class CoreModule { }
+export class CoreModule {}

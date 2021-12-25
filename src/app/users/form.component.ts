@@ -9,7 +9,7 @@ import { User } from './model'
 @Component({
   selector: 'app-user-form',
   templateUrl: './form.component.pug',
-  styleUrls: ['./form.component.sass']
+  styleUrls: ['./form.component.sass'],
 })
 export class UserFormComponent implements OnInit, OnDestroy {
   userId: number
@@ -22,7 +22,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private ntfsSrvc: NotificationService,
-    private userSrvc: UserService
+    private userSrvc: UserService,
   ) {
     this.userId = +this.activatedRoute.snapshot.params.id
   }
@@ -43,34 +43,29 @@ export class UserFormComponent implements OnInit, OnDestroy {
     this.isLoading = true
     let subscription = this.userSrvc
       .getUser(this.userId)
-      .pipe(
-        finalize(() => this.isLoading = false)
-      )
+      .pipe(finalize(() => (this.isLoading = false)))
       .subscribe({
-        next: (user: User) => this.user = user,
+        next: (user: User) => (this.user = user),
         error: (err: Error) => {
           this.ntfsSrvc.warningOrError('Unable to load user', err)
           this.router.navigate(['/users'])
-        }
+        },
       })
     this._subscriptions.add(subscription)
   }
 
   saveUser(): void {
     this.isSaving = true
-    let fn = this.userId ?
-      this.userSrvc.updateUser :
-      this.userSrvc.createUser
-    let subscription = fn.call(this.userSrvc, this.user)
-      .pipe(
-        finalize(() => this.isSaving = false)
-      )
+    let fn = this.userId ? this.userSrvc.updateUser : this.userSrvc.createUser
+    let subscription = fn
+      .call(this.userSrvc, this.user)
+      .pipe(finalize(() => (this.isSaving = false)))
       .subscribe(
         () => {
           this.ntfsSrvc.info(`User ${this.userId ? 'updated' : 'created'} successfully`)
           this.router.navigate(['/users'])
         },
-        (err: Error) => this.ntfsSrvc.warningOrError('Unable to save user', err)
+        (err: Error) => this.ntfsSrvc.warningOrError('Unable to save user', err),
       )
     this._subscriptions.add(subscription)
   }

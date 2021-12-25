@@ -2,6 +2,6 @@ import { Component } from '@angular/core'
 
 @Component({
   selector: 'app-navbar',
-  templateUrl: './navbar.component.pug'
+  templateUrl: './navbar.component.pug',
 })
-export class NavbarComponent { }
+export class NavbarComponent {}

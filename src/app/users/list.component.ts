@@ -10,7 +10,7 @@ import { User } from './model'
 @Component({
   selector: 'app-user-list',
   templateUrl: './list.component.pug',
-  styleUrls: ['./list.component.sass']
+  styleUrls: ['./list.component.sass'],
 })
 export class UserListComponent implements OnInit, OnDestroy {
   users!: User[]
@@ -18,11 +18,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   isSaving = false
   private _subscriptions = new Subscription()
 
-  constructor(
-    private router: Router,
-    private ntfsSrvc: NotificationService,
-    private userSrvc: UserService) {
-  }
+  constructor(private router: Router, private ntfsSrvc: NotificationService, private userSrvc: UserService) {}
 
   ngOnInit(): void {
     this.loadUsers()
@@ -36,12 +32,10 @@ export class UserListComponent implements OnInit, OnDestroy {
     this.isLoading = true
     let subscription = this.userSrvc
       .getUsers()
-      .pipe(
-        finalize(() => this.isLoading = false)
-      )
+      .pipe(finalize(() => (this.isLoading = false)))
       .subscribe({
-        next: (users: User[]) => this.users = users,
-        error: (err: Error) => this.ntfsSrvc.warningOrError('Unable to load users', err)
+        next: (users: User[]) => (this.users = users),
+        error: (err: Error) => this.ntfsSrvc.warningOrError('Unable to load users', err),
       })
     this._subscriptions.add(subscription)
   }
@@ -63,15 +57,13 @@ export class UserListComponent implements OnInit, OnDestroy {
     this.isSaving = true
     let subscription = this.userSrvc
       .deleteUser(user.id)
-      .pipe(
-        finalize(() => this.isSaving = false)
-      )
+      .pipe(finalize(() => (this.isSaving = false)))
       .subscribe(
         () => {
           remove(this.users, user)
           this.ntfsSrvc.info('User deleted successfully')
         },
-        (err: Error) => this.ntfsSrvc.warningOrError('Unable to delete user', err)
+        (err: Error) => this.ntfsSrvc.warningOrError('Unable to delete user', err),
       )
     this._subscriptions.add(subscription)
   }

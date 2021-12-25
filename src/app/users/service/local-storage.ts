@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
-import {
-  LocalStorageRepoService,
-  LocalStorageRepoServiceFactory
-} from '@core/localstorage-repo.service'
+import { LocalStorageRepoService, LocalStorageRepoServiceFactory } from '@core/localstorage-repo.service'
 import { User } from '../model'
 
 @Injectable()

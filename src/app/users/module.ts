@@ -9,24 +9,16 @@ import { UserLocalStrgService } from './service/local-storage'
 import { UserHttpService } from './service/http'
 
 @NgModule({
-  declarations: [
-    UserListComponent,
-    UserFormComponent,
-    UserDetailsComponent
-  ],
+  declarations: [UserListComponent, UserFormComponent, UserDetailsComponent],
   imports: [
     SharedModule,
     RouterModule.forChild([
       { path: 'users', component: UserListComponent },
       { path: 'users/new', component: UserFormComponent },
       { path: 'users/:id/edit', component: UserFormComponent },
-      { path: 'users/:id', component: UserDetailsComponent }
-    ])
+      { path: 'users/:id', component: UserDetailsComponent },
+    ]),
   ],
-  providers: [
-    UserService,
-    UserLocalStrgService,
-    UserHttpService
-  ]
+  providers: [UserService, UserLocalStrgService, UserHttpService],
 })
-export class UsersModule { }
+export class UsersModule {}
