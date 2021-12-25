@@ -9,13 +9,13 @@ Boilerplate for creating Angular project.
 - Clean code:)
 
 ### Set
-- **Framework**: Angular v12
+- **Framework**: Angular v13
 - **Language**: TypeScript v4
 - **Build tool**: @angular-builders/custom-webpack
-- **CSS preprocessor**: stylus
-- **CSS framework**: boostrap v5
-- **Template engine**: pug
-- **Linters**: eslint
+- **CSS preprocessor**: Stylus
+- **CSS framework**: Boostrap v5
+- **Template engine**: Pug
+- **Tools**: ESLint
 
 ### How to use
 ```sh
@@ -25,18 +25,21 @@ git clone https://github.com/AlexanderMac/angular-starter
 # Init your repo:
 cd angular-starter && rm -rf .git && git init
 
+# Install pnpm when needed
+npm install -g pnpm
+
 # Install dependencies:
-npm i
+pnpm i
 
 # Run tests (linter):
-npm test
+pnpm test
 
 # Build app:
-npm run build      # for dev
-npm run build:prod # for production
+pnpm build      # for dev
+pnpm build:prod # for production
 
 # Start app and watch for changes (dev server started on port 3000):
-npm start
+pnpm start
 ```
 
 ### License
