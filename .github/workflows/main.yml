@@ -28,7 +28,7 @@ jobs:
           cache: 'pnpm'
 
       - name: Install Dependencies
-        run: pnpm install --no-frozen-lockfile --strict-peer-dependencies
+        run: pnpm install
 
       - name: Lint codebase
         run: pnpm lint
