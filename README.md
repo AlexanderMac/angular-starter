@@ -9,7 +9,7 @@ Boilerplate for creating Angular project.
 - Clean code:)
 
 ### Set
-- **Framework**: Angular v13
+- **Framework**: Angular v14
 - **Language**: TypeScript v4
 - **Build tool**: @angular-builders/custom-webpack
 - **CSS preprocessor**: SASS
