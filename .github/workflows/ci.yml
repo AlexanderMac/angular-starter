@@ -1,16 +1,14 @@
 name: CI
-
 on:
   - push
   - pull_request
-
 jobs:
   test:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [20.x]
 
     steps:
       - name: Checkout code
