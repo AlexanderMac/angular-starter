@@ -9,13 +9,13 @@ Boilerplate for creating Angular project.
 - Clean code:)
 
 ### Set
-- **Framework**: Angular v14
+- **Framework**: Angular v16
 - **Language**: TypeScript v4
-- **Build tool**: @angular-builders/custom-webpack
+- **Build tool**: Webpack
 - **CSS preprocessor**: SASS
-- **CSS framework**: Boostrap v5
+- **CSS framework**: Bootstrap v5
 - **Template engine**: Pug
-- **Tools**: ESLint, Prettier
+- **Linters, Formatters**: ESLint, Prettier
 
 ### How to use
 ```sh

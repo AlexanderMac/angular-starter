@@ -14,8 +14,7 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "strict": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "target": "es2017",
+    "target": "ES2022",
     "typeRoots": [
       "node_modules/@types"
     ],
