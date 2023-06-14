@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core'
-import { RouterModule } from '@angular/router'
 import { BrowserModule } from '@angular/platform-browser'
-import { AppComponent } from './app.component'
-import { HomeModule } from './home/module'
-import { UsersModule } from './users/module'
-import { AboutModule } from './about/module'
+import { RouterModule } from '@angular/router'
+
+import { AboutModule } from '@app/about/module'
+import { AppComponent } from '@app/app.component'
+import { HomeModule } from '@app/home/module'
+import { UsersModule } from '@app/users/module'
 
 @NgModule({
   declarations: [AppComponent],

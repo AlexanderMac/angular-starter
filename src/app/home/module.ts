@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core'
 import { RouterModule } from '@angular/router'
+
+import { HomeComponent } from '@app/home/home.component'
+import { NotFoundComponent } from '@app/home/not-found.component'
 import { SharedModule } from '@shared/module'
-import { HomeComponent } from './home.component'
-import { NotFoundComponent } from './not-found.component'
 
 @NgModule({
   declarations: [HomeComponent, NotFoundComponent],

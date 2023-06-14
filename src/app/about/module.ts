@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core'
 import { RouterModule } from '@angular/router'
+
+import { AboutMainComponent } from '@app/about/main.component'
 import { SharedModule } from '@shared/module'
-import { AboutMainComponent } from './main.component'
 
 @NgModule({
   declarations: [AboutMainComponent],

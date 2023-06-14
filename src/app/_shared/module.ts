@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { RouterModule } from '@angular/router'
-import { FormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http'
+import { NgModule } from '@angular/core'
+import { FormsModule } from '@angular/forms'
+import { RouterModule } from '@angular/router'
 
 import { CoreModule } from '@core/module'
-import { NavbarComponent } from './navbar.component'
-import { SpinnerComponent } from './spinner.component'
+import { NavbarComponent } from '@shared/navbar.component'
+import { SpinnerComponent } from '@shared/spinner.component'
 
 @NgModule({
   declarations: [NavbarComponent, SpinnerComponent],

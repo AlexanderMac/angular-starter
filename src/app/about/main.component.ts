@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+
 import { environment } from '@env/environment'
 
 @Component({
@@ -7,9 +8,9 @@ import { environment } from '@env/environment'
   styleUrls: ['./main.component.sass'],
 })
 export class AboutMainComponent implements OnInit {
-  production: boolean = false
-  version: string = ''
-  sourceType: string = ''
+  production = false
+  version = ''
+  sourceType = ''
 
   ngOnInit(): void {
     this.production = environment.production

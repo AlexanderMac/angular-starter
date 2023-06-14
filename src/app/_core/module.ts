@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core'
-import { MemoryRepoServiceFactory } from './memory-repo.service'
-import { LocalStorageRepoServiceFactory } from './localstorage-repo.service'
-import { NotificationService } from './notification.service'
+
+import { LocalStorageRepoServiceFactory } from '@core/localstorage-repo.service'
+import { NotificationService } from '@core/notification.service'
 
 @NgModule({
-  providers: [MemoryRepoServiceFactory, LocalStorageRepoServiceFactory, NotificationService],
+  providers: [LocalStorageRepoServiceFactory, NotificationService],
 })
 export class CoreModule {}

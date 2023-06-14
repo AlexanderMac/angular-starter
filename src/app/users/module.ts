@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core'
 import { RouterModule } from '@angular/router'
+
+import { UserDetailsComponent } from '@app/users/details.component'
+import { UserFormComponent } from '@app/users/form.component'
+import { UserListComponent } from '@app/users/list.component'
+import { UserService } from '@app/users/service'
+import { UserHttpService } from '@app/users/service/http'
+import { UserLocalStorageService } from '@app/users/service/local-storage'
 import { SharedModule } from '@shared/module'
-import { UserListComponent } from './list.component'
-import { UserFormComponent } from './form.component'
-import { UserDetailsComponent } from './details.component'
-import { UserService } from './service'
-import { UserLocalStrgService } from './service/local-storage'
-import { UserHttpService } from './service/http'
 
 @NgModule({
   declarations: [UserListComponent, UserFormComponent, UserDetailsComponent],
@@ -19,6 +20,6 @@ import { UserHttpService } from './service/http'
       { path: 'users/:id', component: UserDetailsComponent },
     ]),
   ],
-  providers: [UserService, UserLocalStrgService, UserHttpService],
+  providers: [UserService, UserLocalStorageService, UserHttpService],
 })
 export class UsersModule {}

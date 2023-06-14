@@ -1,11 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { remove } from 'lodash'
 import { Subscription } from 'rxjs'
 import { finalize } from 'rxjs/operators'
+
+import { User } from '@app/users/model'
+import { UserService } from '@app/users/service'
 import { NotificationService } from '@core/notification.service'
-import { UserService } from './service'
-import { User } from './model'
 
 @Component({
   selector: 'app-user-list',
@@ -30,7 +31,7 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   loadUsers(): void {
     this.isLoading = true
-    let subscription = this.userSrvc
+    const subscription = this.userSrvc
       .getUsers()
       .pipe(finalize(() => (this.isLoading = false)))
       .subscribe({
@@ -49,13 +50,13 @@ export class UserListComponent implements OnInit, OnDestroy {
   }
 
   deleteUser(user: User): void {
-    let res = confirm(`Delete ${user.name}? The user will be permanently deleted.`)
+    const res = confirm(`Delete ${user.name}? The user will be permanently deleted.`)
     if (!res) {
       return
     }
 
     this.isSaving = true
-    let subscription = this.userSrvc
+    const subscription = this.userSrvc
       .deleteUser(user.id)
       .pipe(finalize(() => (this.isSaving = false)))
       .subscribe(

@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
+import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
-import { User } from '../model'
+
+import { User } from '@app/users/model'
 
 const USERS_URL = '/users/'
 

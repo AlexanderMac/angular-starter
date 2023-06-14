@@ -1,10 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Subscription } from 'rxjs'
 import { finalize } from 'rxjs/operators'
+
+import { User } from '@app/users/model'
+import { UserService } from '@app/users/service'
 import { NotificationService } from '@core/notification.service'
-import { UserService } from './service'
-import { User } from './model'
 
 @Component({
   selector: 'app-user-form',
@@ -41,7 +42,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
 
   loadUser(): void {
     this.isLoading = true
-    let subscription = this.userSrvc
+    const subscription = this.userSrvc
       .getUser(this.userId)
       .pipe(finalize(() => (this.isLoading = false)))
       .subscribe({
@@ -56,8 +57,8 @@ export class UserFormComponent implements OnInit, OnDestroy {
 
   saveUser(): void {
     this.isSaving = true
-    let fn = this.userId ? this.userSrvc.updateUser : this.userSrvc.createUser
-    let subscription = fn
+    const fn = this.userId ? this.userSrvc.updateUser : this.userSrvc.createUser
+    const subscription = fn
       .call(this.userSrvc, this.user)
       .pipe(finalize(() => (this.isSaving = false)))
       .subscribe(

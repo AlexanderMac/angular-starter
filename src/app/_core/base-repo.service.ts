@@ -1,12 +1,12 @@
-import { cloneDeep, extend, find, chain, remove } from 'lodash'
+import { chain, cloneDeep, extend, find, remove } from 'lodash'
 import { Observable, of } from 'rxjs'
 
-interface IObject {
+type Entity = {
   id: any
 }
 
 export class BaseRepoService {
-  protected _objects: IObject[]
+  protected _objects: Entity[]
   protected _nextId: number
 
   constructor() {
@@ -15,7 +15,7 @@ export class BaseRepoService {
   }
 
   getOne(id: any): Observable<any> {
-    let obj = chain(this._objects)
+    const obj = chain(this._objects)
       .find({ id: parseInt(id) })
       .cloneDeep()
       .value()
@@ -33,13 +33,13 @@ export class BaseRepoService {
   }
 
   update(objData: any): Observable<any> {
-    let obj = find(this._objects, { id: parseInt(objData.id) })
+    const obj = find(this._objects, { id: parseInt(objData.id) })
     extend(obj, objData)
     return of(cloneDeep(obj))
   }
 
   delete(id: any): Observable<boolean> {
-    let result = remove(this._objects, obj => obj.id === parseInt(id))
+    const result = remove(this._objects, obj => obj.id === parseInt(id))
     return of(!!result)
   }
 }

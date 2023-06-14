@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
+
+import { User } from '@app/users/model'
+import { UserHttpService } from '@app/users/service/http'
+import { UserLocalStorageService } from '@app/users/service/local-storage'
 import { environment } from '@env/environment'
-import { UserLocalStrgService } from './local-storage'
-import { UserHttpService } from './http'
-import { User } from '../model'
 
 @Injectable()
 export class UserService {
   private _repoSrvc: any
 
-  constructor(ls: UserLocalStrgService, http: UserHttpService) {
+  constructor(ls: UserLocalStorageService, http: UserHttpService) {
     this._repoSrvc = environment.sourceType === 'local-storage' ? ls : http
   }
 

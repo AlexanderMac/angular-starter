@@ -1,5 +1,5 @@
 export const environment = {
-  production: false,
+  production: true,
   version: '1.0.0',
   sourceType: 'local-storage',
 }
