@@ -8,6 +8,7 @@
     "pnpm": ">=7"
   },
   "scripts": {
+    "prepare": "husky install",
     "ng": "ng",
     "generate": "ng generate",
     "build": "ng build --configuration development",
@@ -48,6 +49,8 @@
     "eslint": "^8.42.0",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "eslint-plugin-unused-imports": "^2.0.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
     "prettier": "^2.8.8",
     "pug-html-loader": "^1.1.5",
     "raw-loader": "^4.0.2",
