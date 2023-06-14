@@ -5,12 +5,22 @@ import { FormsModule } from '@angular/forms'
 import { RouterModule } from '@angular/router'
 
 import { CoreModule } from '@core/module'
+import { AboutMainComponent } from '@shared/about.component'
 import { NavbarComponent } from '@shared/navbar.component'
+import { NotFoundComponent } from '@shared/not-found.component'
 import { SpinnerComponent } from '@shared/spinner.component'
 
 @NgModule({
-  declarations: [NavbarComponent, SpinnerComponent],
-  imports: [CommonModule, RouterModule, FormsModule, CoreModule],
+  declarations: [NavbarComponent, SpinnerComponent, AboutMainComponent, NotFoundComponent],
+  imports: [
+    CommonModule,
+    RouterModule.forChild([
+      { path: 'about', component: AboutMainComponent },
+      { path: '404', component: NotFoundComponent },
+    ]),
+    FormsModule,
+    CoreModule,
+  ],
   exports: [CommonModule, RouterModule, FormsModule, HttpClientModule, CoreModule, NavbarComponent, SpinnerComponent],
 })
 export class SharedModule {}

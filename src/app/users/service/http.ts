@@ -18,11 +18,11 @@ export class UserHttpService {
     return this.httpSrvc.get<User[]>(USERS_URL)
   }
 
-  createUser(user: User): Observable<User> {
-    return this.httpSrvc.post<User>(USERS_URL, user)
+  createUser(userData: User): Observable<User> {
+    return this.httpSrvc.post<User>(USERS_URL, userData)
   }
 
-  updateUser(userData: any): Observable<User> {
+  updateUser(userData: User): Observable<User> {
     return this.httpSrvc.put<User>(USERS_URL + userData.id, userData)
   }
 

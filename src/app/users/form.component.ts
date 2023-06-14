@@ -17,7 +17,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
   user: User | undefined
   isLoading = false
   isSaving = false
-  private _subscriptions = new Subscription()
+  private subscriptions = new Subscription()
 
   constructor(
     private router: Router,
@@ -30,14 +30,14 @@ export class UserFormComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if (!this.userId) {
-      this.user = new User()
+      this.user = {} as User
     } else {
       this.loadUser()
     }
   }
 
   ngOnDestroy(): void {
-    this._subscriptions.unsubscribe()
+    this.subscriptions.unsubscribe()
   }
 
   loadUser(): void {
@@ -52,22 +52,19 @@ export class UserFormComponent implements OnInit, OnDestroy {
           this.router.navigate(['/users'])
         },
       })
-    this._subscriptions.add(subscription)
+    this.subscriptions.add(subscription)
   }
 
   saveUser(): void {
     this.isSaving = true
-    const fn = this.userId ? this.userSrvc.updateUser : this.userSrvc.createUser
-    const subscription = fn
-      .call(this.userSrvc, this.user)
-      .pipe(finalize(() => (this.isSaving = false)))
-      .subscribe(
-        () => {
-          this.ntfsSrvc.info(`User ${this.userId ? 'updated' : 'created'} successfully`)
-          this.router.navigate(['/users'])
-        },
-        (err: Error) => this.ntfsSrvc.warningOrError('Unable to save user', err),
-      )
-    this._subscriptions.add(subscription)
+    const fn = this.userId ? this.userSrvc.updateUser(this.user!) : this.userSrvc.createUser(this.user!)
+    const subscription = fn.pipe(finalize(() => (this.isSaving = false))).subscribe({
+      next: () => {
+        this.ntfsSrvc.info(`User ${this.userId ? 'updated' : 'created'} successfully`)
+        this.router.navigate(['/users'])
+      },
+      error: (err: Error) => this.ntfsSrvc.warningOrError('Unable to save user', err),
+    })
+    this.subscriptions.add(subscription)
   }
 }

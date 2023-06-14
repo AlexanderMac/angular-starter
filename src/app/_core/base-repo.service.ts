@@ -1,45 +1,43 @@
-import { chain, cloneDeep, extend, find, remove } from 'lodash'
+import { cloneDeep, remove } from 'lodash'
 import { Observable, of } from 'rxjs'
 
-type Entity = {
-  id: any
+export type Entity = {
+  id: number
 }
 
-export class BaseRepoService {
-  protected _objects: Entity[]
-  protected _nextId: number
+export class BaseRepoService<T extends Entity> {
+  protected entities: T[]
+  protected nextId: number
 
   constructor() {
-    this._objects = []
-    this._nextId = 0
+    this.entities = []
+    this.nextId = 0
   }
 
-  getOne(id: any): Observable<any> {
-    const obj = chain(this._objects)
-      .find({ id: parseInt(id) })
-      .cloneDeep()
-      .value()
-    return of(obj)
+  getOne(id: number): Observable<T> {
+    const entity = this.entities.find(entity => entity.id === id)!
+    const entityClone = cloneDeep(entity)
+    return of(entityClone)
   }
 
-  getList(): Observable<any[]> {
-    return of(cloneDeep(this._objects))
+  getList(): Observable<T[]> {
+    return of(cloneDeep(this.entities))
   }
 
-  create(obj: any): Observable<any> {
-    obj.id = ++this._nextId
-    this._objects.push(cloneDeep(obj))
-    return of(obj)
+  create(entityData: T): Observable<T> {
+    entityData.id = ++this.nextId
+    this.entities.push(cloneDeep(entityData))
+    return of(entityData)
   }
 
-  update(objData: any): Observable<any> {
-    const obj = find(this._objects, { id: parseInt(objData.id) })
-    extend(obj, objData)
-    return of(cloneDeep(obj))
+  update(entityData: T): Observable<T> {
+    const entity = this.entities.find(entity => entity.id === entityData.id)!
+    Object.assign(entity, entityData)
+    return of(cloneDeep(entity))
   }
 
-  delete(id: any): Observable<boolean> {
-    const result = remove(this._objects, obj => obj.id === parseInt(id))
+  delete(id: number): Observable<boolean> {
+    const result = remove(this.entities, entity => entity.id === id)
     return of(!!result)
   }
 }

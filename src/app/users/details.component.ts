@@ -17,7 +17,7 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
   user: User | undefined
   isLoading = false
   isSaving = false
-  private _subscriptions = new Subscription()
+  private subscriptions = new Subscription()
 
   constructor(
     private router: Router,
@@ -33,7 +33,7 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this._subscriptions.unsubscribe()
+    this.subscriptions.unsubscribe()
   }
 
   loadUser(): void {
@@ -48,6 +48,6 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
           this.router.navigate(['/users'])
         },
       })
-    this._subscriptions.add(subscription)
+    this.subscriptions.add(subscription)
   }
 }

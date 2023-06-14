@@ -3,6 +3,14 @@ import * as Toastr from 'toastr'
 const WARNING_OPTS = { timeOut: 10000 }
 const ERROR_OPTS = { timeOut: 15000 }
 
+type CustomError = Error & {
+  status?: number
+  error?: {
+    message: string
+    details: string
+  }
+}
+
 export class NotificationService {
   constructor() {
     Toastr.options.closeButton = true
@@ -19,25 +27,25 @@ export class NotificationService {
     Toastr.info(msg)
   }
 
-  warning(title: string, err?: any): void {
+  warning(title: string, err?: CustomError): void {
     if (err) {
-      const errMsg = this._getErrorMessage(err)
+      const errMsg = this.getErrorMessage(err)
       Toastr.warning(errMsg, title, WARNING_OPTS)
     } else {
       Toastr.warning(title, undefined, WARNING_OPTS)
     }
   }
 
-  error(title: string, err?: any): void {
+  error(title: string, err?: CustomError): void {
     if (err) {
-      const errMsg = this._getErrorMessage(err)
+      const errMsg = this.getErrorMessage(err)
       Toastr.error(errMsg, title, ERROR_OPTS)
     } else {
       Toastr.error(title, undefined, ERROR_OPTS)
     }
   }
 
-  warningOrError(title: string, err?: any): void {
+  warningOrError(title: string, err?: CustomError): void {
     if (!err || !err.status || err.status < 500) {
       this.warning(title, err)
     } else {
@@ -45,7 +53,7 @@ export class NotificationService {
     }
   }
 
-  private _getErrorMessage(errOrString: any): string {
+  private getErrorMessage(errOrString: CustomError): string {
     let errMsg = ''
     if (errOrString) {
       if (errOrString.error) {
@@ -59,7 +67,7 @@ export class NotificationService {
       } else if (errOrString.message) {
         errMsg = errOrString.message
       } else {
-        errMsg = errOrString
+        errMsg = errOrString.toString()
       }
     }
     return errMsg

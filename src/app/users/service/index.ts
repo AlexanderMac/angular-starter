@@ -8,29 +8,29 @@ import { environment } from '@env/environment'
 
 @Injectable()
 export class UserService {
-  private _repoSrvc: any
+  private repoSrvc: UserLocalStorageService | UserHttpService
 
   constructor(ls: UserLocalStorageService, http: UserHttpService) {
-    this._repoSrvc = environment.sourceType === 'local-storage' ? ls : http
+    this.repoSrvc = environment.sourceType === 'local-storage' ? ls : http
   }
 
   getUser(id: number): Observable<User> {
-    return this._repoSrvc.getUser(id)
+    return this.repoSrvc.getUser(id)
   }
 
   getUsers(): Observable<User[]> {
-    return this._repoSrvc.getUsers()
+    return this.repoSrvc.getUsers()
   }
 
-  createUser(user: User): Observable<User> {
-    return this._repoSrvc.createUser(user)
+  createUser(userData: User): Observable<User> {
+    return this.repoSrvc.createUser(userData)
   }
 
-  updateUser(userData: any): Observable<User> {
-    return this._repoSrvc.updateUser(userData)
+  updateUser(userData: User): Observable<User> {
+    return this.repoSrvc.updateUser(userData)
   }
 
   deleteUser(id: number): Observable<boolean> {
-    return this._repoSrvc.deleteUser(id)
+    return this.repoSrvc.deleteUser(id)
   }
 }

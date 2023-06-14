@@ -1,5 +1,6 @@
-export class User {
-  id!: number
-  name!: string
-  email!: string
+import { Entity } from '@core/base-repo.service'
+
+export type User = Entity & {
+  name: string
+  email: string
 }

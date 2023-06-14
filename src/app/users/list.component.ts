@@ -17,7 +17,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   users!: User[]
   isLoading = false
   isSaving = false
-  private _subscriptions = new Subscription()
+  private subscriptions = new Subscription()
 
   constructor(private router: Router, private ntfsSrvc: NotificationService, private userSrvc: UserService) {}
 
@@ -26,7 +26,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this._subscriptions.unsubscribe()
+    this.subscriptions.unsubscribe()
   }
 
   loadUsers(): void {
@@ -38,7 +38,7 @@ export class UserListComponent implements OnInit, OnDestroy {
         next: (users: User[]) => (this.users = users),
         error: (err: Error) => this.ntfsSrvc.warningOrError('Unable to load users', err),
       })
-    this._subscriptions.add(subscription)
+    this.subscriptions.add(subscription)
   }
 
   userDetails(user: User): void {
@@ -66,6 +66,6 @@ export class UserListComponent implements OnInit, OnDestroy {
         },
         (err: Error) => this.ntfsSrvc.warningOrError('Unable to delete user', err),
       )
-    this._subscriptions.add(subscription)
+    this.subscriptions.add(subscription)
   }
 }

@@ -1,61 +1,55 @@
 import { Injectable } from '@angular/core'
-import { attempt, chain, isError } from 'lodash'
-import { Observable } from 'rxjs'
+import { attempt, isError, max } from 'lodash'
+import { Observable, tap } from 'rxjs'
 
-import { BaseRepoService } from '@core/base-repo.service'
+import { BaseRepoService, Entity } from '@core/base-repo.service'
 
-export class LocalStorageRepoService extends BaseRepoService {
-  private _localStorage: Storage
-  private _collectionName!: string
+export class LocalStorageRepoService<T extends Entity> extends BaseRepoService<T> {
+  private localStorage: Storage
+  private collectionName!: string
 
   constructor() {
     super()
-    this._localStorage = window.localStorage
+    this.localStorage = window.localStorage
   }
 
   init(collectionName: string): void {
-    this._collectionName = collectionName
+    this.collectionName = collectionName
     this.load()
   }
 
-  load(): void {
-    const objsStr = this._localStorage.getItem(this._collectionName)
-    if (objsStr) {
-      const parseResult = attempt(JSON.parse.bind(null, objsStr)) as any[]
-      this._objects = isError(parseResult) ? [] : parseResult
-      const nextIdStr = chain(this._objects).map('id').max().value()
-      this._nextId = +nextIdStr || 0
+  private load(): void {
+    const entityStr = this.localStorage.getItem(this.collectionName)
+    if (entityStr) {
+      const parseResult = attempt(JSON.parse.bind(null, entityStr)) as Error | T[]
+      this.entities = isError(parseResult) ? [] : parseResult
+      const entityIds = (this.entities ?? []).map(entity => entity.id)
+      const nextId = max(entityIds)
+      this.nextId = nextId ?? 1
     }
   }
 
-  save(): void {
-    const objsStr = JSON.stringify(this._objects)
-    this._localStorage.setItem(this._collectionName, objsStr)
+  private save(): void {
+    const entityStr = JSON.stringify(this.entities)
+    this.localStorage.setItem(this.collectionName, entityStr)
   }
 
-  override create(obj: any): Observable<any> {
-    const obs = super.create(obj)
-    obs.subscribe(() => this.save())
-    return obs
+  override create(entityData: T): Observable<T> {
+    return super.create(entityData).pipe(tap(() => this.save()))
   }
 
-  override update(objData: any): Observable<any> {
-    const obs = super.update(objData)
-    obs.subscribe(() => this.save())
-    return obs
+  override update(entityData: T): Observable<T> {
+    return super.update(entityData).pipe(tap(() => this.save()))
   }
 
-  override delete(id: any): Observable<boolean> {
-    const obs = super.delete(id)
-    obs.subscribe(() => this.save())
-    return obs
+  override delete(id: number): Observable<boolean> {
+    return super.delete(id).pipe(tap(() => this.save()))
   }
 }
 
 @Injectable()
 export class LocalStorageRepoServiceFactory {
-  getInstance(): LocalStorageRepoService {
-    const instance = new LocalStorageRepoService()
-    return instance
+  getInstance<T extends Entity>(): LocalStorageRepoService<T> {
+    return new LocalStorageRepoService<T>()
   }
 }
