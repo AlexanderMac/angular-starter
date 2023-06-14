@@ -2,34 +2,32 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": false,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": false,
-    "module": "es2020",
-    "moduleResolution": "node",
     "downlevelIteration": true,
     "experimentalDecorators": true,
+    "moduleResolution": "node",
     "importHelpers": true,
-    "strict": true,
     "target": "ES2022",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
+    "module": "ES2022",
+    "useDefineForClassFields": false,
     "lib": [
-      "es2018",
+      "ES2022",
       "dom"
     ],
-    "baseUrl": "./",
     "paths": {
-      "@app/*": ["src/app/*"],
-      "@core": ["src/app/_core"],
+      "@env/*": ["src/environments/*"],
       "@core/*": ["src/app/_core/*"],
-      "@shared": ["src/app/_shared"],
       "@shared/*": ["src/app/_shared/*"],
-      "@env/*": ["src/environments/*"]
+      "@app/*": ["src/app/*"],
     }
   },
   "angularCompilerOptions": {

@@ -1,6 +1,6 @@
 {
+  "typescript.preferences.importModuleSpecifier": "non-relative",
   "eslint.validate": [
-    "javascript",
     "typescript"
   ]
 }

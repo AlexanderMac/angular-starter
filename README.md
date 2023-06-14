@@ -10,8 +10,8 @@ Boilerplate for creating Angular project.
 
 ### Set
 - **Framework**: Angular v16
-- **Language**: TypeScript v4
-- **Build tool**: Webpack
+- **Language**: TypeScript v5
+- **Build tool**: Webpack v5
 - **CSS preprocessor**: SASS
 - **CSS framework**: Bootstrap v5
 - **Template engine**: Pug
@@ -31,15 +31,19 @@ npm install -g pnpm
 # Install dependencies:
 pnpm i
 
-# Run tests (linter):
-pnpm test
-
-# Build app:
-pnpm build      # for dev
-pnpm build:prod # for production
-
 # Start app and watch for changes (dev server started on port 3000):
 pnpm start
+```
+
+### Commands
+```sh
+pnpm generate   # angular generator
+pnpm build      # build for dev
+pnpm build:prod # build for production
+pnpm start      # Start app and watch for changes (dev server started on port 3000)
+pnpm lint       # run linter and fix found issues
+pnpm prettify   # run prettier
+pnpm format     # run linter and prettier
 ```
 
 ### License
