@@ -10,33 +10,27 @@ app-spinner(*ngIf="isLoading")
         hr
 
   form(#taskForm="ngForm" '(ngSubmit)'="saveTask()")
-    .mb-3
-      label.form-label(for="taskName") Name*
-      input.form-control(
-        name="taskName"
-        type="text"
-        placeholder="Task name"
-        required="true"
-        #taskName="ngModel"
-        '[(ngModel)]'="task.name"
-        '[disabled]'="isSaving"
-        '[ngClass]'="{ 'is-invalid': taskName.invalid && (taskName.dirty || taskName.touched)}"
-      )
-    .mb-3
-      label.form-label(for="taskEmail") Email*
-      input.form-control(
-        name="taskEmail"
-        type="email"
-        placeholder="Task email"
-        required="true"
-        #taskEmail="ngModel"
-        '[(ngModel)]'="task.email"
-        '[disabled]'="isSaving"
-        '[ngClass]'="{ 'is-invalid': taskEmail.invalid && (taskEmail.dirty || taskEmail.touched)}"
-      )
-    .buttons
-      a.btn.btn-light(routerLink="/tasks") Cancel
-      button.btn.btn-primary(
-        type="submit"
-        '[disabled]'="!taskForm.form.valid || isSaving"
-      ) Save
+    .row.mb-3
+      .col
+        input.form-control(
+          name="taskName"
+          type="text"
+          placeholder="Task name"
+          required="true"
+          #taskName="ngModel"
+          '[(ngModel)]'="task.name"
+          '[disabled]'="isSaving"
+          '[ngClass]'="{ 'is-invalid': taskName.invalid && (taskName.dirty || taskName.touched)}"
+        )
+    .row.mb-3
+      .col
+        .form-check
+          input.form-check-input(type="checkbox" id="taskDone")
+          label.form-check-label(for="taskDone") Done
+    .row
+      .col.text-end
+        button.btn.btn-primary.me-1(
+          type="submit"
+          '[disabled]'="!taskForm.form.valid || isSaving"
+        ) Save
+        a.btn.btn-secondary(routerLink="/tasks") Cancel

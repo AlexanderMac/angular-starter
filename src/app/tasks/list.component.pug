@@ -10,13 +10,13 @@ app-spinner(*ngIf="isLoading")
         tr
           th.id(scope="col") #
           th(scope="col") Name
-          th(scope="col") Email
+          th(scope="col") Done
           th.actions(scope="col")
       tbody
         tr(*ngFor="let task of tasks")
           th(scope="row") {{ task.id }}
           td {{ task.name }}
-          td {{ task.email }}
+          td {{ task.done ? 'Yes' : 'No' }}
           td.actions
             button.btn.btn-info.btn-sm(
               type="button"

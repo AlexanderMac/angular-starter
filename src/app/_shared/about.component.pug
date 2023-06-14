@@ -3,13 +3,16 @@ app-navbar
 .container.about
   .row
     .col
-      h2 Angular-Starter
-      p
-        strong Production:
-        span {{ production }}
-      p
-        strong Version:
-        span {{ version }}
-      p
-        strong SourceType:
-        span {{ sourceType }}
+      .card 
+        .card-body
+          h5.card-title Angular-Starter
+          ul
+            li
+              strong.me-1 Production:
+              span {{ production }}
+            li
+              strong.me-1 Version:
+              span {{ version }}
+            li
+              strong.me-1 SourceType:
+              span {{ sourceType }}

@@ -6,8 +6,8 @@ app-spinner(*ngIf="isLoading")
     .col
       h2 {{ task.name }}
       p
-        strong Email:
-        a(href="mailto:{{ task.email }}") {{ task.email }}
-      .buttons
-        a.btn.btn-light(routerLink="/tasks") Cancel
-        a.btn.btn-primary(routerLink="/tasks/{{ task.id }}/edit") Edit
+        strong.me-1 Done:
+        span {{ task.done ? 'Yes' : 'No' }}
+      div
+        a.btn.btn-primary.me-1(routerLink="/tasks/{{ task.id }}/edit") Edit
+        a.btn.btn-secondary(routerLink="/tasks") Cancel
