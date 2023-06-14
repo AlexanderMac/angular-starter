@@ -1,8 +1,3 @@
-import * as Toastr from 'toastr'
-
-const WARNING_OPTS = { timeOut: 10000 }
-const ERROR_OPTS = { timeOut: 15000 }
-
 type CustomError = Error & {
   status?: number
   error?: {
@@ -12,36 +7,29 @@ type CustomError = Error & {
 }
 
 export class NotificationService {
-  constructor() {
-    Toastr.options.closeButton = true
-    Toastr.options.timeOut = 3000
-    Toastr.options.escapeHtml = true
-    Toastr.options.preventDuplicates = true
-  }
-
   success(msg: string): void {
-    Toastr.success(msg)
+    alert(msg)
   }
 
   info(msg: string): void {
-    Toastr.info(msg)
+    alert(msg)
   }
 
   warning(title: string, err?: CustomError): void {
     if (err) {
       const errMsg = this.getErrorMessage(err)
-      Toastr.warning(errMsg, title, WARNING_OPTS)
+      alert(title + '\n' + errMsg)
     } else {
-      Toastr.warning(title, undefined, WARNING_OPTS)
+      alert(title)
     }
   }
 
   error(title: string, err?: CustomError): void {
     if (err) {
       const errMsg = this.getErrorMessage(err)
-      Toastr.error(errMsg, title, ERROR_OPTS)
+      alert(title + '\n' + errMsg)
     } else {
-      Toastr.error(title, undefined, ERROR_OPTS)
+      alert(title)
     }
   }
 
