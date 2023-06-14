@@ -1,0 +1,13 @@
+app-navbar
+
+app-spinner(*ngIf="isLoading")
+.container.task-details(*ngIf="!isLoading && task")
+  .row
+    .col
+      h2 {{ task.name }}
+      p
+        strong Email:
+        a(href="mailto:{{ task.email }}") {{ task.email }}
+      .buttons
+        a.btn.btn-light(routerLink="/tasks") Cancel
+        a.btn.btn-primary(routerLink="/tasks/{{ task.id }}/edit") Edit

@@ -1,0 +1,42 @@
+app-navbar
+
+app-spinner(*ngIf="isLoading")
+.container.task-form(*ngIf="!isLoading && task")
+  .row
+    .col
+      h2
+        span(*ngIf="taskId") Edit Task
+        span(*ngIf="!taskId") Create Task
+        hr
+
+  form(#taskForm="ngForm" '(ngSubmit)'="saveTask()")
+    .mb-3
+      label.form-label(for="taskName") Name*
+      input.form-control(
+        name="taskName"
+        type="text"
+        placeholder="Task name"
+        required="true"
+        #taskName="ngModel"
+        '[(ngModel)]'="task.name"
+        '[disabled]'="isSaving"
+        '[ngClass]'="{ 'is-invalid': taskName.invalid && (taskName.dirty || taskName.touched)}"
+      )
+    .mb-3
+      label.form-label(for="taskEmail") Email*
+      input.form-control(
+        name="taskEmail"
+        type="email"
+        placeholder="Task email"
+        required="true"
+        #taskEmail="ngModel"
+        '[(ngModel)]'="task.email"
+        '[disabled]'="isSaving"
+        '[ngClass]'="{ 'is-invalid': taskEmail.invalid && (taskEmail.dirty || taskEmail.touched)}"
+      )
+    .buttons
+      a.btn.btn-light(routerLink="/tasks") Cancel
+      button.btn.btn-primary(
+        type="submit"
+        '[disabled]'="!taskForm.form.valid || isSaving"
+      ) Save

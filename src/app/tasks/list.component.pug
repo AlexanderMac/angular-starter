@@ -1,9 +1,9 @@
 app-navbar
 
 app-spinner(*ngIf="isLoading")
-.container.user-list(*ngIf="!isLoading")
-  h2 Users
-  a.btn.btn-primary(routerLink="/users/new") New User
+.container.task-list(*ngIf="!isLoading")
+  h2 Tasks
+  a.btn.btn-primary(routerLink="/tasks/new") New Task
   .table-responsive
     table.table.table-striped
       thead
@@ -13,28 +13,28 @@ app-spinner(*ngIf="isLoading")
           th(scope="col") Email
           th.actions(scope="col")
       tbody
-        tr(*ngFor="let user of users")
-          th(scope="row") {{ user.id }}
-          td {{ user.name }}
-          td {{ user.email }}
+        tr(*ngFor="let task of tasks")
+          th(scope="row") {{ task.id }}
+          td {{ task.name }}
+          td {{ task.email }}
           td.actions
             button.btn.btn-info.btn-sm(
               type="button"
               title="View"
-              '(click)'="userDetails(user)"
+              '(click)'="taskDetails(task)"
               '[disabled]'="isSaving"
             ) View
             button.btn.btn-warning.btn-sm(
               type="button"
               title="Edit"
-              '(click)'="editUser(user)"
+              '(click)'="editTask(task)"
               '[disabled]'="isSaving"
             ) Edit
             button.btn.btn-danger.btn-sm(
               type="button"
               title="Delete"
-              '(click)'="deleteUser(user)"
+              '(click)'="deleteTask(task)"
               '[disabled]'="isSaving"
             ) Delete
-        tr(*ngIf="users.length === 0")
-          td.text-center(colspan="4") No users
+        tr(*ngIf="tasks.length === 0")
+          td.text-center(colspan="4") No tasks

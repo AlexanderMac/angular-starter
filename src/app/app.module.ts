@@ -3,17 +3,17 @@ import { BrowserModule } from '@angular/platform-browser'
 import { RouterModule } from '@angular/router'
 
 import { AppComponent } from '@app/app.component'
-import { UsersModule } from '@app/users/module'
+import { TasksModule } from '@app/tasks/module'
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     RouterModule.forRoot([
-      { path: '', redirectTo: '/users', pathMatch: 'full' },
+      { path: '', redirectTo: '/tasks', pathMatch: 'full' },
       { path: '**', redirectTo: '/404' },
     ]),
-    UsersModule,
+    TasksModule,
   ],
   providers: [{ provide: Window, useValue: window }],
   bootstrap: [AppComponent],

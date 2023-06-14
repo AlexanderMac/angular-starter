@@ -3,18 +3,18 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { Subscription } from 'rxjs'
 import { finalize } from 'rxjs/operators'
 
-import { User } from '@app/users/model'
-import { UserService } from '@app/users/service'
+import { Task } from '@app/tasks/model'
+import { TaskService } from '@app/tasks/service'
 import { NotificationService } from '@core/notification.service'
 
 @Component({
-  selector: 'app-user-details',
+  selector: 'app-task-details',
   templateUrl: './details.component.pug',
   styleUrls: ['./details.component.sass'],
 })
-export class UserDetailsComponent implements OnInit, OnDestroy {
-  userId: number
-  user: User | undefined
+export class TaskDetailsComponent implements OnInit, OnDestroy {
+  taskId: number
+  task: Task | undefined
   isLoading = false
   isSaving = false
   private subscriptions = new Subscription()
@@ -23,29 +23,29 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private ntfsSrvc: NotificationService,
-    private userSrvc: UserService,
+    private taskSrvc: TaskService,
   ) {
-    this.userId = +this.activatedRoute.snapshot.params.id
+    this.taskId = +this.activatedRoute.snapshot.params.id
   }
 
   ngOnInit(): void {
-    this.loadUser()
+    this.loadTask()
   }
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe()
   }
 
-  loadUser(): void {
+  loadTask(): void {
     this.isLoading = true
-    const subscription = this.userSrvc
-      .getUser(this.userId)
+    const subscription = this.taskSrvc
+      .getTask(this.taskId)
       .pipe(finalize(() => (this.isLoading = false)))
       .subscribe({
-        next: (user: User) => (this.user = user),
+        next: (task: Task) => (this.task = task),
         error: (err: Error) => {
-          this.ntfsSrvc.warningOrError('Unable to load user', err)
-          this.router.navigate(['/users'])
+          this.ntfsSrvc.warningOrError('Unable to load task', err)
+          this.router.navigate(['/tasks'])
         },
       })
     this.subscriptions.add(subscription)

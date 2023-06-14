@@ -3,18 +3,18 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { Subscription } from 'rxjs'
 import { finalize } from 'rxjs/operators'
 
-import { User } from '@app/users/model'
-import { UserService } from '@app/users/service'
+import { Task } from '@app/tasks/model'
+import { TaskService } from '@app/tasks/service'
 import { NotificationService } from '@core/notification.service'
 
 @Component({
-  selector: 'app-user-form',
+  selector: 'app-task-form',
   templateUrl: './form.component.pug',
   styleUrls: ['./form.component.sass'],
 })
-export class UserFormComponent implements OnInit, OnDestroy {
-  userId: number
-  user: User | undefined
+export class TaskFormComponent implements OnInit, OnDestroy {
+  taskId: number
+  task: Task | undefined
   isLoading = false
   isSaving = false
   private subscriptions = new Subscription()
@@ -23,16 +23,16 @@ export class UserFormComponent implements OnInit, OnDestroy {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private ntfsSrvc: NotificationService,
-    private userSrvc: UserService,
+    private taskSrvc: TaskService,
   ) {
-    this.userId = +this.activatedRoute.snapshot.params.id
+    this.taskId = +this.activatedRoute.snapshot.params.id
   }
 
   ngOnInit(): void {
-    if (!this.userId) {
-      this.user = {} as User
+    if (!this.taskId) {
+      this.task = {} as Task
     } else {
-      this.loadUser()
+      this.loadTask()
     }
   }
 
@@ -40,30 +40,30 @@ export class UserFormComponent implements OnInit, OnDestroy {
     this.subscriptions.unsubscribe()
   }
 
-  loadUser(): void {
+  loadTask(): void {
     this.isLoading = true
-    const subscription = this.userSrvc
-      .getUser(this.userId)
+    const subscription = this.taskSrvc
+      .getTask(this.taskId)
       .pipe(finalize(() => (this.isLoading = false)))
       .subscribe({
-        next: (user: User) => (this.user = user),
+        next: (task: Task) => (this.task = task),
         error: (err: Error) => {
-          this.ntfsSrvc.warningOrError('Unable to load user', err)
-          this.router.navigate(['/users'])
+          this.ntfsSrvc.warningOrError('Unable to load task', err)
+          this.router.navigate(['/tasks'])
         },
       })
     this.subscriptions.add(subscription)
   }
 
-  saveUser(): void {
+  saveTask(): void {
     this.isSaving = true
-    const fn = this.userId ? this.userSrvc.updateUser(this.user!) : this.userSrvc.createUser(this.user!)
+    const fn = this.taskId ? this.taskSrvc.updateTask(this.task!) : this.taskSrvc.createTask(this.task!)
     const subscription = fn.pipe(finalize(() => (this.isSaving = false))).subscribe({
       next: () => {
-        this.ntfsSrvc.info(`User ${this.userId ? 'updated' : 'created'} successfully`)
-        this.router.navigate(['/users'])
+        this.ntfsSrvc.info(`Task ${this.taskId ? 'updated' : 'created'} successfully`)
+        this.router.navigate(['/tasks'])
       },
-      error: (err: Error) => this.ntfsSrvc.warningOrError('Unable to save user', err),
+      error: (err: Error) => this.ntfsSrvc.warningOrError('Unable to save task', err),
     })
     this.subscriptions.add(subscription)
   }

@@ -1,6 +1,6 @@
 import { Entity } from '@core/base-repo.service'
 
-export type User = Entity & {
+export type Task = Entity & {
   name: string
   email: string
 }
