@@ -1,4 +1,4 @@
-import { Entity } from '@core/base-repo.service'
+import { Entity } from '@core/entity'
 
 export type Task = Entity & {
   name: string

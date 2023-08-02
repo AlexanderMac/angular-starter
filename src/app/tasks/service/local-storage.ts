@@ -9,8 +9,8 @@ export class TaskLocalStorageService {
   private repoSrvc: LocalStorageRepoService<Task>
 
   constructor(factory: LocalStorageRepoServiceFactory) {
-    this.repoSrvc = factory.getInstance()
-    this.repoSrvc.init('Tasks')
+    this.repoSrvc = factory.createInstance('Tasks')
+    this.repoSrvc.init()
   }
 
   getTask(id: number): Observable<Task> {

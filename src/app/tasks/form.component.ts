@@ -56,7 +56,7 @@ export class TaskFormComponent implements OnInit, OnDestroy {
 
   saveTask(): void {
     this.isSaving = true
-    const fn = this.taskId ? this.taskSrvc.updateTask(this.task) : this.taskSrvc.createTask(this.task)
+    const fn = this.taskId ? this.taskSrvc.updateTask(this.task!) : this.taskSrvc.createTask(this.task!)
     const subscription = fn.pipe(finalize(() => (this.isSaving = false))).subscribe({
       next: () => {
         this.ntfsSrvc.info(`Task ${this.taskId ? 'updated' : 'created'} successfully`)

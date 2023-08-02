@@ -1,21 +1,48 @@
 import { Injectable } from '@angular/core'
-import { attempt, isError, max } from 'lodash'
-import { Observable, tap } from 'rxjs'
+import { attempt, cloneDeep, isError, max, remove } from 'lodash'
+import { Observable, of } from 'rxjs'
 
-import { BaseRepoService, Entity } from '@core/base-repo.service'
+import { Entity } from '@core/entity'
 
-export class LocalStorageRepoService<T extends Entity> extends BaseRepoService<T> {
-  private localStorage: Storage
-  private collectionName!: string
+export class LocalStorageRepoService<T extends Entity> {
+  private localStorage: Storage = window.localStorage
+  private entities: T[] = []
+  private nextId = 0
 
-  constructor() {
-    super()
-    this.localStorage = window.localStorage
+  constructor(private collectionName: string) {}
+
+  init(): void {
+    this.load()
   }
 
-  init(collectionName: string): void {
-    this.collectionName = collectionName
-    this.load()
+  getOne(id: number): Observable<T> {
+    const entity = this.entities.find(entity => entity.id === id)!
+    const entityClone = cloneDeep(entity)
+    return of(entityClone)
+  }
+
+  getList(): Observable<T[]> {
+    return of(cloneDeep(this.entities))
+  }
+
+  create(entityData: T): Observable<T> {
+    entityData.id = ++this.nextId
+    this.entities.push(cloneDeep(entityData))
+    this.save()
+    return of(entityData)
+  }
+
+  update(entityData: T): Observable<T> {
+    const entity = this.entities.find(entity => entity.id === entityData.id)!
+    Object.assign(entity, entityData)
+    this.save()
+    return of(entityData)
+  }
+
+  delete(id: number): Observable<boolean> {
+    const result = remove(this.entities, entity => entity.id === id)
+    this.save()
+    return of(!!result)
   }
 
   private load(): void {
@@ -33,23 +60,11 @@ export class LocalStorageRepoService<T extends Entity> extends BaseRepoService<T
     const entityStr = JSON.stringify(this.entities)
     this.localStorage.setItem(this.collectionName, entityStr)
   }
-
-  override create(entityData: T): Observable<T> {
-    return super.create(entityData).pipe(tap(() => this.save()))
-  }
-
-  override update(entityData: T): Observable<T> {
-    return super.update(entityData).pipe(tap(() => this.save()))
-  }
-
-  override delete(id: number): Observable<boolean> {
-    return super.delete(id).pipe(tap(() => this.save()))
-  }
 }
 
 @Injectable()
 export class LocalStorageRepoServiceFactory {
-  getInstance<T extends Entity>(): LocalStorageRepoService<T> {
-    return new LocalStorageRepoService<T>()
+  createInstance<T extends Entity>(collectionName: string): LocalStorageRepoService<T> {
+    return new LocalStorageRepoService<T>(collectionName)
   }
 }
