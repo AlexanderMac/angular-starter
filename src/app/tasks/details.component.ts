@@ -10,7 +10,6 @@ import { NotificationService } from '@core/notification.service'
 @Component({
   selector: 'app-task-details',
   templateUrl: './details.component.pug',
-  styleUrls: ['./details.component.sass'],
 })
 export class TaskDetailsComponent implements OnInit, OnDestroy {
   taskId: number
