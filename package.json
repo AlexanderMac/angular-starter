@@ -13,6 +13,7 @@
     "generate": "ng generate",
     "build": "ng build --configuration development",
     "build:prod": "ng build",
+    "build:docs": "ng build  --base-href /express-starter/ && mv dist docs",
     "start": "ng serve",
     "lint": "ng lint --fix",
     "prettify": "prettier --write \"src/**/*.ts\"",
