@@ -1,6 +1,8 @@
 # angular-starter
 Boilerplate for creating Angular project.
 
+[Demo](https://alexandermac.github.io/angular-starter/)
+
 [![Build Status](https://github.com/AlexanderMac/angular-starter/workflows/CI/badge.svg)](https://github.com/AlexanderMac/angular-starter/actions?query=workflow%3ACI)
 
 ### Features
@@ -8,7 +10,6 @@ Boilerplate for creating Angular project.
 - Using LocalStorage or HttpClient as a source data
 - Clean code:)
 
-[Demo](https://alexandermac.github.io/angular-starter/)
 
 ### Set
 - **Framework**: Angular v16
