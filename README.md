@@ -8,6 +8,8 @@ Boilerplate for creating Angular project.
 - Using LocalStorage or HttpClient as a source data
 - Clean code:)
 
+[Demo](https://alexandermac.github.io/angular-starter/)
+
 ### Set
 - **Framework**: Angular v16
 - **Language**: TypeScript v5
