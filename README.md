@@ -1,4 +1,7 @@
 # angular-starter
+
+## WARNING :warning:: This repo is not maintained anymore.
+
 Boilerplate for creating Angular project.
 
 [Demo](https://alexandermac.github.io/angular-starter/)
